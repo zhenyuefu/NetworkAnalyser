@@ -8,7 +8,7 @@ import javafx.scene.control.MenuItem;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class HelloController {
+public class MainController {
     private Stage stage;
     @FXML private Label networkFrameLabel;
     @FXML private MenuBar menuBar;
