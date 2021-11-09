@@ -54,7 +54,6 @@ jobs:
 
 
     - name: Release
-      uses: ncipollo/release-action@v1
+      uses: softprops/action-gh-release@v1
       with:
-        artifacts: "target/*.zip"
-        token: ${{ secrets.GITHUB_TOKEN }}
+        files: target/${{ matrix.asset_name }}.zip
