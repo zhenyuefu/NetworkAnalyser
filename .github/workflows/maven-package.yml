@@ -39,7 +39,7 @@ jobs:
 
     - name: Archive Release
       uses: thedoctor0/zip-release@master
-#      if: ${{ runner.os != 'macOS' }}
+      if: ${{ runner.os != 'macOS' }}
       with:
           type: 'tar'
           filename: '${{ matrix.asset_name }}.tar.gz'
@@ -55,6 +55,13 @@ jobs:
 
 
     - name: Release
+      if: ${{ runner.os != 'macOS' }}
       uses: softprops/action-gh-release@v1
       with:
         files: target/${{ matrix.asset_name }}.tar.gz
+
+    - name: Release mac
+      if: ${{ runner.os == 'macOS' }}
+      uses: softprops/action-gh-release@v1
+      with:
+          files: target/${{ matrix.asset_name }}
