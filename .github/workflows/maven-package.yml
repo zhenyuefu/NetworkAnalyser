@@ -31,9 +31,19 @@ jobs:
       working-directory: target
       run: jpackage --runtime-image image --type app-image -n analyser-linux -m indi.zhenyue.networkanalyser/indi.zhenyue.networkanalyser.Launcher
     
-    - name: upload
-      uses: actions/upload-artifact@v2
+    - name: Archive Release
+      uses: thedoctor0/zip-release@master
       with:
-        name: analyser-linux
-        path: target/analyser-linux
+        type: 'zip'
+        filename: 'release-linux.zip'
+        path: analyser-linux
+        directory: target
+        
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: target/release-linux.zip
+        tag: ${{ github.ref }}
+        overwrite: true
   
