@@ -19,10 +19,7 @@ jobs:
             asset_name: analyser-windows-amd64
           - os: macos-11
             asset_name: analyser-macos-amd64
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
+    runs-on: ${{ matrix.os }}
 
     steps:
     - uses: actions/checkout@v2
