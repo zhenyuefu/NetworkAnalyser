@@ -31,7 +31,7 @@ jobs:
       working-directory: target
       run: jpackage --runtime-image image --type app-image -n analyser-linux -m indi.zhenyue.networkanalyser/indi.zhenyue.networkanalyser.Launcher
     
-    - uses: meeDamian/github-release@2.0
+    - uses: meeDamian/github-release@latest
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.RELEASE_TOKEN }}
         files: analyser-linux
