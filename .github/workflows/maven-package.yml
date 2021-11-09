@@ -57,4 +57,4 @@ jobs:
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
-        files: target/${{ matrix.asset_name }}.*
+        files: target/${{ matrix.asset_name }}*
