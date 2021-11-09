@@ -30,8 +30,17 @@ jobs:
     - name: package
       working-directory: target
       run: jpackage --runtime-image image --type app-image -n analyser-linux -m indi.zhenyue.networkanalyser/indi.zhenyue.networkanalyser.Launcher
-    
-    - uses: meeDamian/github-release@v2.0.3
+
+    - name: Archive Release
+      uses: thedoctor0/zip-release@master
       with:
-        token: ${{ secrets.RELEASE_TOKEN }}
-        files: analyser-linux
+          type: 'zip'
+          filename: 'release-linux.zip'
+          path: analyser-linux
+          directory: target
+
+    - name: Release
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: "target/*.zip"
+        token: ${{ secrets.GITHUB_TOKEN }}
