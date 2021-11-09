@@ -39,6 +39,7 @@ jobs:
 
     - name: Archive Release
       uses: thedoctor0/zip-release@master
+      if: ${{ ${{ matrix.asset_name }} != macos-11 }}
       with:
           type: 'zip'
           filename: '${{ matrix.asset_name }}.zip'
