@@ -50,11 +50,11 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
           name: ${{ matrix.asset_name }}
-          path: target/${{ matrix.asset_name }}.zip
+          path: target/${{ matrix.asset_name }}.*
 
 
 
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
-        files: target/${{ matrix.asset_name }}.zip
+        files: target/${{ matrix.asset_name }}.*
