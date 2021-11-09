@@ -4,8 +4,8 @@
 name: Maven Package
 
 on:
-  release:
-    types: [created]
+  create:
+    tags:
 
 jobs:
   build-linux:
@@ -39,8 +39,7 @@ jobs:
         path: analyser-linux
         directory: target
         
-    - name: Upload binaries to release
-      uses: AButler/upload-release-assets@v2.0
+    - name: Release
+      uses: softprops/action-gh-release@v1
       with:
-          files: 'target/*.zip'
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          files: target/release-linux.zip
