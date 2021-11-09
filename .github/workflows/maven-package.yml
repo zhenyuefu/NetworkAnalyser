@@ -28,30 +28,12 @@ jobs:
       run: mvn javafx:jlink
 
     - name: package
-      working-directory: $GITHUB_WORKSPACE/target
+      working-directory: target
       run: jpackage --runtime-image image --type app-image -n analyser-linux -m indi.zhenyue.networkanalyser/indi.zhenyue.networkanalyser.Launcher
-
-  build-windows:
-
-    runs-on: windows-latest
-    permissions:
-      contents: read
-      packages: write
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 17
-      uses: actions/setup-java@v2
+    
+    - name: upload
+      uses: actions/upload-artifact@v2
       with:
-        java-version: '17'
-        distribution: 'temurin'
-        cache: 'maven'
-        
-    - name: Build with Maven
-      run: mvn javafx:jlink
-
-    - name: package
-      working-directory: $GITHUB_WORKSPACE/target
-      run: jpackage --runtime-image image --type app-image -n analyser-windows -m indi.zhenyue.networkanalyser/indi.zhenyue.networkanalyser.Launcher
-
-
+        name: analyser-linux
+        path: target/analyser-linux
+  
