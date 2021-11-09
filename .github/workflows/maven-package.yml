@@ -8,8 +8,17 @@ on:
     tags:
 
 jobs:
-  build-linux:
-
+  build:
+    name: build for ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            asset_name: analyser-linux-amd64
+          - os: windows-latest
+            asset_name: analyser-windows-amd64
+          - os: macos-11
+            asset_name: analyser-macos-amd64
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -29,18 +38,18 @@ jobs:
 
     - name: package
       working-directory: target
-      run: jpackage --runtime-image image --type app-image -n analyser-linux -m indi.zhenyue.networkanalyser/indi.zhenyue.networkanalyser.Launcher
+      run: jpackage --runtime-image image --type app-image -n ${{ matrix.asset_name }} -m indi.zhenyue.networkanalyser/indi.zhenyue.networkanalyser.Launcher
 
-    - name: Archive Release
-      uses: thedoctor0/zip-release@master
-      with:
-          type: 'zip'
-          filename: 'release-linux.zip'
-          path: analyser-linux
-          directory: target
+#    - name: Archive Release
+#      uses: thedoctor0/zip-release@master
+#      with:
+#          type: 'zip'
+#          filename: '${{ matrix.asset_name }}.zip'
+#          path: ${{ matrix.asset_name }}
+#          directory: target
 
-    - name: Release
-      uses: ncipollo/release-action@v1
+    - name: Upload
+      uses: actions/upload-artifact@v2
       with:
-        artifacts: "target/*.zip"
-        token: ${{ github.token }}
+          name: ${{ matrix.asset_name }}
+          path: target/${{ matrix.asset_name }}
