@@ -8,17 +8,31 @@ on:
     tags:
 
 jobs:
+
+  release:
+    name: create-release
+
+    runs-on: ubuntu-latest
+    steps:
+    - name: Release
+      uses: softprops/action-gh-release@v1
+
   build:
+    needs:
+      - release
     name: build for ${{ matrix.os }}
     strategy:
       matrix:
         include:
           - os: ubuntu-latest
             asset_name: analyser-linux-amd64
+            suffix: tar.gz
           - os: windows-latest
             asset_name: analyser-windows-amd64
+            suffix: tar.gz
           - os: macos-11
             asset_name: analyser-macos-amd64
+            suffix: app
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -46,24 +60,16 @@ jobs:
           path: ${{ matrix.asset_name }}
           directory: target
 
-    - name: Archive Release mac
-      uses: thedoctor0/zip-release@master
-      if: ${{ runner.os == 'macOS' }}
-      with:
-        type: 'tar'
-        filename: '${{ matrix.asset_name }}.tar.gz'
-        path: ${{ matrix.asset_name }}.app
-        directory: target
-
     - name: Upload
       uses: actions/upload-artifact@v2
       with:
           name: ${{ matrix.asset_name }}
-          path: target/${{ matrix.asset_name }}.tar.gz
+          path: target/${{ matrix.asset_name }}.${{ matrix.suffix }}
 
-
-
-    - name: Release
-      uses: softprops/action-gh-release@v1
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
       with:
-        files: target/${{ matrix.asset_name }}.tar.gz
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: target/${{ matrix.asset_name }}.${{ matrix.asset_name }}.${{ matrix.suffix }}
+          tag: ${{ github.ref }}
+          overwrite: true
