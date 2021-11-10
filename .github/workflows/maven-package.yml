@@ -37,6 +37,12 @@ jobs:
       working-directory: target
       run: jpackage --runtime-image image --type app-image -n ${{ matrix.asset_name }} -m indi.zhenyue.networkanalyser/indi.zhenyue.networkanalyser.Launcher
 
+    - name: Publish to GitHub
+      shell: bash
+      run: |
+         cd target
+         ls -la
+
     - name: Archive Release
       uses: thedoctor0/zip-release@master
       if: ${{ runner.os != 'macOS' }}
@@ -50,7 +56,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
           name: ${{ matrix.asset_name }}
-          path: target/${{ matrix.asset_name }}.tar.gz
+          path: target/${{ matrix.asset_name }}.*
 
 
 
@@ -58,10 +64,4 @@ jobs:
       if: ${{ runner.os != 'macOS' }}
       uses: softprops/action-gh-release@v1
       with:
-        files: target/${{ matrix.asset_name }}.tar.gz
-
-    - name: Release mac
-      if: ${{ runner.os == 'macOS' }}
-      uses: softprops/action-gh-release@v1
-      with:
-          files: target/${{ matrix.asset_name }}
+        files: target/${{ matrix.asset_name }}.*
