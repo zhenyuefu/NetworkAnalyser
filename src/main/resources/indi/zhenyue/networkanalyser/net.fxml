@@ -32,18 +32,13 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.TreeView?>
-<?import javafx.scene.input.KeyCodeCombination?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.input.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="indi.zhenyue.networkanalyser.MainController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="indi.zhenyue.networkanalyser.MainController">
   <children>
     <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
       <menus>
@@ -70,14 +65,29 @@
         </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" VBox.vgrow="ALWAYS">
       <children>
-        <Label fx:id="networkPacketLabel" alignment="CENTER" layoutX="158.0" layoutY="72.0" style="&#10;" text="Drag components from Library here…" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
+        <Label fx:id="networkPacketLabel" alignment="CENTER" layoutX="292.0" layoutY="14.0" style="&#10;" text="Drag components from Library here…" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
           <font>
             <Font size="18.0" />
           </font>
         </Label>
-            <TreeView layoutX="88.0" layoutY="161.0" prefHeight="200.0" prefWidth="464.0" />
+            <TreeView layoutX="49.0" layoutY="223.0" prefHeight="129.0" prefWidth="803.0" />
+            <ScrollPane fx:id="scrollPane" layoutX="49.0" layoutY="55.0" prefHeight="155.0" prefWidth="803.0">
+               <content>
+                  <TableView fx:id="tableViewFrame" prefHeight="186.0" prefWidth="828.0">
+                    <columns>
+                      <TableColumn fx:id="numCol" prefWidth="75.0" text="No." />
+                      <TableColumn fx:id="timeCol" prefWidth="75.0" text="Time" />
+                        <TableColumn fx:id="srcCol" prefWidth="105.0" text="Source" />
+                        <TableColumn fx:id="destCol" prefWidth="103.0" text="Destination" />
+                        <TableColumn fx:id="protocolCol" prefWidth="89.0" text="Protocol" />
+                        <TableColumn fx:id="lengthCol" prefWidth="83.0" text="Length" />
+                        <TableColumn fx:id="infoCol" prefWidth="299.0" text="Info" />
+                    </columns>
+                  </TableView>
+               </content>
+            </ScrollPane>
       </children>
     </AnchorPane>
   </children>

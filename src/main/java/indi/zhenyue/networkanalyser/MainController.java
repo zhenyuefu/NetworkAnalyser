@@ -1,8 +1,9 @@
 package indi.zhenyue.networkanalyser;
 
+import indi.zhenyue.networkanalyser.packet.Frame;
+import indi.zhenyue.networkanalyser.packet.FrameAnalyser;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuBar;
+import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -15,6 +16,9 @@ public class MainController {
     private Stage stage;
     @FXML private Label networkPacketLabel;
     @FXML private MenuBar menuBar;
+    @FXML private ScrollPane scrollPane;
+    @FXML private TableView<Frame> tableViewFrame;
+    @FXML private TableColumn numCol, timeCol, srcCol, destCol, protocolCol, lengthCol, infoCol;
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -31,7 +35,8 @@ public class MainController {
             new FileChooser.ExtensionFilter("All Files", "*.*"));
         File packetFile = fileChooser.showOpenDialog(stage);
         if (packetFile != null) {
-            networkPacketLabel.setText(openFile(packetFile));
+            //networkPacketLabel.setText(openFile(packetFile));
+            FrameAnalyser fa = new FrameAnalyser(openFile(packetFile), tableViewFrame,numCol, timeCol, srcCol, destCol, protocolCol, lengthCol, infoCol);
         }
     }
 
