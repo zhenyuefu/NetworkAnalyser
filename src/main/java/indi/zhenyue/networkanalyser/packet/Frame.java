@@ -1,12 +1,10 @@
 package indi.zhenyue.networkanalyser.packet;
 
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Frame {
 
     public static int cpt = 0;
-    //private final SimpleIntegerProperty id;
     private final SimpleStringProperty id, time, src, dest, protocol, length, info;
 
     public Frame(String time, String src, String dest, String protocol, String length, String info) {
@@ -74,9 +72,8 @@ public class Frame {
     public void setInfo(String info) {
         this.info.set(info);
     }
+
     /*
-
-
 
     public static int cpt = 0;
     private int id;
@@ -147,9 +144,5 @@ public class Frame {
     public void setInfo(String info) {
         this.info = info;
     }
-
-
-
-
 */
 }

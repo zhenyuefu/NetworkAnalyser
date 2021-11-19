@@ -15,12 +15,21 @@ public class FrameAnalyser {
 
     private final TableView<Frame> tableViewFrame;
     private final ObservableList<Frame> data;
-    private final TableColumn numCol, timeCol, srcCol, destCol, protocolCol, lengthCol, infoCol;
-    private String dataFrame;
-    private List<Byte> bytes = new ArrayList<>();
+    private final TableColumn<Frame, String> numCol, timeCol, srcCol, destCol, protocolCol, lengthCol, infoCol;
+    private final String dataFrame;
+    private final List<Byte> bytes = new ArrayList<>();
+    private double timeBegin;
+    private double timeCurrent;
 
-
-    public FrameAnalyser(String dataFrame, TableView<Frame> tableViewFrame, TableColumn numCol, TableColumn timeCol, TableColumn srcCol, TableColumn destCol, TableColumn protocolCol, TableColumn lengthCol, TableColumn infoCol) {
+    public FrameAnalyser(String dataFrame,
+                         TableView<Frame> tableViewFrame,
+                         TableColumn<Frame, String> numCol,
+                         TableColumn<Frame, String> timeCol,
+                         TableColumn<Frame, String> srcCol,
+                         TableColumn<Frame, String> destCol,
+                         TableColumn<Frame, String> protocolCol,
+                         TableColumn<Frame, String> lengthCol,
+                         TableColumn<Frame, String> infoCol) {
         this.dataFrame = dataFrame;
         this.tableViewFrame = tableViewFrame;
         this.data = FXCollections.observableArrayList();
@@ -34,16 +43,16 @@ public class FrameAnalyser {
         init();
         analyser();
     }
-    
+
     public void init() {
-        numCol.setCellValueFactory(new PropertyValueFactory<Frame, String>("id"));
-        timeCol.setCellValueFactory(new PropertyValueFactory<Frame, String>("time"));
-        srcCol.setCellValueFactory(new PropertyValueFactory<Frame, String>("src"));
-        destCol.setCellValueFactory(new PropertyValueFactory<Frame, String>("dest"));
-        protocolCol.setCellValueFactory(new PropertyValueFactory<Frame, String>("protocol"));
-        lengthCol.setCellValueFactory(new PropertyValueFactory<Frame, String>("length"));
-        infoCol.setCellValueFactory(new PropertyValueFactory<Frame, String>("info"));
-        update();
+        numCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        timeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
+        srcCol.setCellValueFactory(new PropertyValueFactory<>("src"));
+        destCol.setCellValueFactory(new PropertyValueFactory<>("dest"));
+        protocolCol.setCellValueFactory(new PropertyValueFactory<>("protocol"));
+        lengthCol.setCellValueFactory(new PropertyValueFactory<>("length"));
+        infoCol.setCellValueFactory(new PropertyValueFactory<>("info"));
+        timeBegin = System.nanoTime();
     }
 
     public void analyser() {
@@ -78,6 +87,7 @@ public class FrameAnalyser {
     }
 
     private void extractFrame() {
+        timeCurrent = (System.nanoTime()-timeBegin)/1000000000;
         String ipsrc = IPAddress.toString(extractInteger(bytes, 26, 4));
         String ipdest = IPAddress.toString(extractInteger(bytes, 30, 4));
         String protocol = null;
@@ -85,8 +95,7 @@ public class FrameAnalyser {
             protocol = "TCP";
         }
         String len = "" + extractInteger(bytes, 16, 2);
-        System.out.println(bytes.size());
-        addFrame(new Frame("1", ipsrc, ipdest, protocol, len, "1"));
+        addFrame(new Frame(String.format("%.6f",timeCurrent), ipsrc, ipdest, protocol, len, "1"));
     }
 
     public int extractInteger(List<Byte> bytes, int pos, int cnt) {
