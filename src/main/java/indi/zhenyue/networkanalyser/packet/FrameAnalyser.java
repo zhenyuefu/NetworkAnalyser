@@ -34,7 +34,7 @@ public class FrameAnalyser {
         init();
         analyser();
     }
-
+    
     public void init() {
         numCol.setCellValueFactory(new PropertyValueFactory<Frame, String>("id"));
         timeCol.setCellValueFactory(new PropertyValueFactory<Frame, String>("time"));
@@ -51,15 +51,24 @@ public class FrameAnalyser {
         String[] s = dataFrame.split("\n");
         for (int i = 0; i < s.length; i++) {
             String[] s2 = s[i].split("\\s+");
-            if(i!=0&&s2[0].equals("0000")){
+            if (i != 0 && s2[0].equals("0000")) {
                 extractFrame();
                 bytes.clear();
             }
-            for (int j = 0; j < s2.length; j++) {
+            column:for (int j = 0; j < s2.length; j++) {
                 if (s2[j].length() == 2) {
                     try {
                         bytes.add((byte) Integer.parseInt(s2[j], 16));
                     } catch (NumberFormatException e) {
+                        while(i<s.length-1) {
+                            i++;
+                            s2 = s[i].split("\\s+");
+                            if (s2[0].equals("0000")) {
+                                i--;
+                                break column;
+                            }
+
+                        }
                     }
                 }
             }
@@ -72,18 +81,22 @@ public class FrameAnalyser {
         String ipsrc = IPAddress.toString(extractInteger(bytes, 26, 4));
         String ipdest = IPAddress.toString(extractInteger(bytes, 30, 4));
         String protocol = null;
-        if(extractInteger(bytes,23,1)==6){
+        if (extractInteger(bytes, 23, 1) == 6) {
             protocol = "TCP";
         }
-        String len = ""+extractInteger(bytes,16,2);
-
+        String len = "" + extractInteger(bytes, 16, 2);
+        System.out.println(bytes.size());
         addFrame(new Frame("1", ipsrc, ipdest, protocol, len, "1"));
     }
 
     public int extractInteger(List<Byte> bytes, int pos, int cnt) {
         int value = 0;
         for (int i = 0; i < cnt; i++) {
-            value |= ((bytes.get(pos + cnt - i - 1) & 0xff) << 8 * i);
+            try {
+                value |= ((bytes.get(pos + cnt - i - 1) & 0xff) << 8 * i);
+            } catch (IndexOutOfBoundsException ignored){
+
+            }
         }
         return value;
     }
