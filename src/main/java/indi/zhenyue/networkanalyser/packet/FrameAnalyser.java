@@ -51,6 +51,10 @@ public class FrameAnalyser {
         String[] s = dataFrame.split("\n");
         for (int i = 0; i < s.length; i++) {
             String[] s2 = s[i].split("\\s+");
+            if(i!=0&&s2[0].equals("0000")){
+                extractFrame();
+                bytes.clear();
+            }
             for (int j = 0; j < s2.length; j++) {
                 if (s2[j].length() == 2) {
                     try {
@@ -59,25 +63,19 @@ public class FrameAnalyser {
                     }
                 }
             }
-            if(i!=0&&s2[0].equals("0000")){
-                extractFrame();
-                bytes.clear();
-            }
         }
-
-
-
+        extractFrame();
+        bytes.clear();
     }
 
     private void extractFrame() {
-        String ipsrc = IPAddress.tostring(extractInteger(bytes, 26, 4));
-        String ipdest = IPAddress.tostring(extractInteger(bytes, 30, 4));
+        String ipsrc = IPAddress.toString(extractInteger(bytes, 26, 4));
+        String ipdest = IPAddress.toString(extractInteger(bytes, 30, 4));
         String protocol = null;
         if(extractInteger(bytes,23,1)==6){
             protocol = "TCP";
         }
         String len = ""+extractInteger(bytes,16,2);
-
 
         addFrame(new Frame("1", ipsrc, ipdest, protocol, len, "1"));
     }
