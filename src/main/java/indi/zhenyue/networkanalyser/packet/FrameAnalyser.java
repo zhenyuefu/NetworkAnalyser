@@ -22,15 +22,10 @@ public class FrameAnalyser {
     private double timeBegin;
     private double timeCurrent;
 
-    public FrameAnalyser(String dataFrame,
-                         TableView<Frame> tableViewFrame,
-                         TableColumn<Frame, String> numCol,
-                         TableColumn<Frame, String> timeCol,
-                         TableColumn<Frame, String> srcCol,
-                         TableColumn<Frame, String> destCol,
-                         TableColumn<Frame, String> protocolCol,
-                         TableColumn<Frame, String> lengthCol,
-                         TableColumn<Frame, String> infoCol) {
+    public FrameAnalyser(String dataFrame, TableView<Frame> tableViewFrame, TableColumn<Frame, String> numCol,
+        TableColumn<Frame, String> timeCol, TableColumn<Frame, String> srcCol, TableColumn<Frame, String> destCol,
+        TableColumn<Frame, String> protocolCol, TableColumn<Frame, String> lengthCol,
+        TableColumn<Frame, String> infoCol) {
         this.dataFrame = dataFrame;
         this.tableViewFrame = tableViewFrame;
         this.data = FXCollections.observableArrayList();
@@ -43,6 +38,14 @@ public class FrameAnalyser {
         this.infoCol = infoCol;
         init();
         analyser();
+    }
+
+    public static short getUnsignedByteValue(final byte x) {
+        ByteBuffer tmpBuffer = ByteBuffer.allocate(2);
+        tmpBuffer.put(new byte[] {0x00, x});
+        tmpBuffer.flip();
+        tmpBuffer.order(ByteOrder.BIG_ENDIAN);
+        return tmpBuffer.getShort();
     }
 
     public void init() {
@@ -65,12 +68,13 @@ public class FrameAnalyser {
                 extractFrame();
                 bytes.clear();
             }
-            column:for (int j = 0; j < s2.length; j++) {
+            column:
+            for (int j = 0; j < s2.length; j++) {
                 if (s2[j].length() == 2) {
                     try {
-                        bytes.add((byte) Integer.parseInt(s2[j], 16));
+                        bytes.add((byte)Integer.parseInt(s2[j], 16));
                     } catch (NumberFormatException e) {
-                        while(i<s.length-1) {
+                        while (i < s.length - 1) {
                             i++;
                             s2 = s[i].split("\\s+");
                             if (s2[0].equals("0000")) {
@@ -106,14 +110,6 @@ public class FrameAnalyser {
 
     public void update() {
         this.tableViewFrame.setItems(data);
-    }
-
-    public static short getUnsignedByteValue(final byte x) {
-        ByteBuffer tmpBuffer = ByteBuffer.allocate(2);
-        tmpBuffer.put(new byte[]{0x00, x});
-        tmpBuffer.flip();
-        tmpBuffer.order(ByteOrder.BIG_ENDIAN);
-        return tmpBuffer.getShort();
     }
 
 }

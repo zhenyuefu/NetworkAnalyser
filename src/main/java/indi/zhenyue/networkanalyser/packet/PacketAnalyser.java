@@ -131,12 +131,11 @@ public class PacketAnalyser {
     }
 
     private enum PARSER_STATE {
-        /* Waiting for start of new packet */
-        INIT, /* Starting from beginning of line */
-        START_OF_LINE, /* Just read the offset */
-        READ_OFFSET, /* Just read a byte */
-        READ_BYTE, /* Just read text - ignore until EOL */
-        READ_TEXT
+        INIT,             /* Waiting for start of new packet */
+        START_OF_LINE,    /* Starting from beginning of line */
+        READ_OFFSET,      /* Just read the offset */
+        READ_BYTE,        /* Just read a byte */
+        READ_TEXT         /* Just read text - ignore until EOL */
     }
 
 }
