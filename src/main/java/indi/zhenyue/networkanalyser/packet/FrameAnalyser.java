@@ -1,5 +1,6 @@
 package indi.zhenyue.networkanalyser.packet;
 
+import indi.zhenyue.networkanalyser.util.ArrayHelper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
@@ -87,27 +88,15 @@ public class FrameAnalyser {
     }
 
     private void extractFrame() {
-        timeCurrent = (System.nanoTime()-timeBegin)/1000000000;
-        String ipsrc = IPAddress.toString(extractInteger(bytes, 26, 4));
-        String ipdest = IPAddress.toString(extractInteger(bytes, 30, 4));
+        timeCurrent = (System.nanoTime() - timeBegin) / 1000000000;
+        String ipsrc = IPAddress.toString(ArrayHelper.extractInteger(bytes, 26, 4));
+        String ipdest = IPAddress.toString(ArrayHelper.extractInteger(bytes, 30, 4));
         String protocol = null;
-        if (extractInteger(bytes, 23, 1) == 6) {
+        if (ArrayHelper.extractInteger(bytes, 23, 1) == 6) {
             protocol = "TCP";
         }
-        String len = "" + extractInteger(bytes, 16, 2);
-        addFrame(new Frame(String.format("%.6f",timeCurrent), ipsrc, ipdest, protocol, len, "1"));
-    }
-
-    public int extractInteger(List<Byte> bytes, int pos, int cnt) {
-        int value = 0;
-        for (int i = 0; i < cnt; i++) {
-            try {
-                value |= ((bytes.get(pos + cnt - i - 1) & 0xff) << 8 * i);
-            } catch (IndexOutOfBoundsException ignored){
-
-            }
-        }
-        return value;
+        String len = "" + ArrayHelper.extractInteger(bytes, 16, 2);
+        addFrame(new Frame(String.format("%.6f", timeCurrent), ipsrc, ipdest, protocol, len, "1"));
     }
 
     public void addFrame(Frame f) {

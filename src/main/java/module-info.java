@@ -1,4 +1,4 @@
-module indi.zhenyue.networkanalyser {
+module Networkanalyser {
     requires javafx.controls;
     requires javafx.fxml;
 
