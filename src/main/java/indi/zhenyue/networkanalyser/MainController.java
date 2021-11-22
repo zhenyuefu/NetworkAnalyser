@@ -1,8 +1,7 @@
 package indi.zhenyue.networkanalyser;
 
-import indi.zhenyue.networkanalyser.packet.ContentFrame;
-import indi.zhenyue.networkanalyser.packet.Frame;
-import indi.zhenyue.networkanalyser.packet.FrameAnalyser;
+import indi.zhenyue.networkanalyser.packet.*;
+import indi.zhenyue.networkanalyser.util.FileUtility;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -14,6 +13,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author zhenyue
@@ -50,6 +50,10 @@ public class MainController {
                     new ContentFrame(treeView, newFrame);
                 }
             });
+            PacketAnalyser pa = new PacketAnalyser();
+            List<Packet> list = pa.parse(FileUtility.readFile(packetFile));
+
+
         }
     }
 

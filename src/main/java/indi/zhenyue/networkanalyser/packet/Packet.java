@@ -3,7 +3,7 @@ package indi.zhenyue.networkanalyser.packet;
 import java.util.Arrays;
 
 public class Packet {
-    private byte[] bytes;
+    protected byte[] bytes;
 
     public Packet(byte[] bytes) {
         this.bytes = bytes;

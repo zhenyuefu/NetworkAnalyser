@@ -1,5 +1,6 @@
 package indi.zhenyue.networkanalyser.packet;
 
+import indi.zhenyue.networkanalyser.util.HexUtils;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 
@@ -31,20 +32,20 @@ public class ContentFrame {
         sousItem = new TreeItem<>("Interface id: 0 (known)");
         sousItem.getChildren().add(new TreeItem<>("Interface name: unknown"));
         treeItems.get(1).getChildren().add(sousItem);
+/*
 
-
-        treeItems.add(new TreeItem<>("Ethernet II, Src: " + macAddress(6) + ", Dest: " + macAddress(0)));
+        treeItems.add(new TreeItem<>("Ethernet II, Src: " + MACAddress.extract(6) + ", Dest: " + MACAddress.extract(0)));
         sousItemsList = new TreeItem[3];
-        sousItemsList[0] = new TreeItem<>("Destination: " + macAddress(0));
-        sousItemsList[0].getChildren().add(new TreeItem<>("Address: " + macAddress(0)));
+        sousItemsList[0] = new TreeItem<>("Destination: " + MACAddress.extract(0));
+        sousItemsList[0].getChildren().add(new TreeItem<>("Address: " + MACAddress.extract(0)));
         sousItemsList[0].getChildren().add(new TreeItem<>(".... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)"));
         sousItemsList[0].getChildren().add(new TreeItem<>(".... ...0 .... .... .... .... = IG bit: Individual address (unicast)"));
-        sousItemsList[1] = new TreeItem<>("Source: " + macAddress(6));
-        sousItemsList[1].getChildren().add(new TreeItem<>("Address: " + macAddress(6)));
+        sousItemsList[1] = new TreeItem<>("Source: " + MACAddress.extract(6));
+        sousItemsList[1].getChildren().add(new TreeItem<>("Address: " + MACAddress.extract(6)));
         sousItemsList[1].getChildren().add(new TreeItem<>(".... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)"));
         sousItemsList[1].getChildren().add(new TreeItem<>(".... ...0 .... .... .... .... = IG bit: Individual address (unicast)"));
 
-        String protocol = bytesToHexString(bytes.get(12))+bytesToHexString(bytes.get(13));
+        String protocol = HexUtils.bytesToHexString(bytes.get(12))+HexUtils.bytesToHexString(bytes.get(13));
         switch (protocol){
             case "0800":
                 sousItemsList[2] = new TreeItem<>("Type IPv4 (0x0800)");
@@ -75,33 +76,11 @@ public class ContentFrame {
         treeItemRoot.setExpanded(true);
         treeView.setShowRoot(false);
         treeView.setRoot(treeItemRoot);
+
+ */
     }
 
-    public String macAddress(int pos) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(bytesToHexString(bytes.get(pos)));
-        for (int i = 1; i < 6; i++) {
-            sb.append(":");
-            sb.append(bytesToHexString(bytes.get(pos + i)));
-        }
-        return sb.toString();
-    }
 
-    public static String bytesToHexString(Byte src) {
-        StringBuilder stringBuilder = new StringBuilder("");
-        if (src == null) {
-            return null;
-        }
-
-        int v = src & 0xFF;
-        String hv = Integer.toHexString(v);
-        if (hv.length() < 2) {
-            stringBuilder.append(0);
-        }
-        stringBuilder.append(hv);
-
-        return stringBuilder.toString();
-    }
 
 
 }

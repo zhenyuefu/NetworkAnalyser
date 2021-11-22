@@ -67,30 +67,18 @@
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" VBox.vgrow="ALWAYS">
       <children>
-            <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="49.0" layoutY="55.0" prefHeight="155.0" prefWidth="803.0" vbarPolicy="ALWAYS">
-               <content>
-                  <TableView fx:id="tableViewFrame" prefHeight="174.0" prefWidth="826.0">
-                    <columns>
-                      <TableColumn fx:id="numCol" prefWidth="75.0" text="No." />
-                      <TableColumn fx:id="timeCol" text="Time" />
-                        <TableColumn fx:id="srcCol" prefWidth="150.0" text="Source" />
-                        <TableColumn fx:id="destCol" prefWidth="150.0" text="Destination" />
-                        <TableColumn fx:id="protocolCol" text="Protocol" />
-                        <TableColumn fx:id="lengthCol" text="Length" />
-                        <TableColumn fx:id="infoCol" prefWidth="299.0" text="Info" />
-                    </columns>
-                  </TableView>
-               </content>
-            </ScrollPane>
-            <ScrollPane hbarPolicy="NEVER" layoutX="49.0" layoutY="214.0" prefHeight="202.0" prefWidth="803.0" vbarPolicy="ALWAYS">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="224.0" prefWidth="782.0">
-                     <children>
-                        <TreeView fx:id="treeView" prefHeight="248.0" prefWidth="766.0" />
-                     </children>
-                  </AnchorPane>
-              </content>
-            </ScrollPane>
+            <TableView fx:id="tableViewFrame" layoutX="49.0" layoutY="27.0" prefHeight="227.0" prefWidth="803.0">
+              <columns>
+                <TableColumn fx:id="numCol" prefWidth="75.0" text="No." />
+                <TableColumn fx:id="timeCol" text="Time" />
+                  <TableColumn fx:id="srcCol" prefWidth="150.0" text="Source" />
+                  <TableColumn fx:id="destCol" prefWidth="150.0" text="Destination" />
+                  <TableColumn fx:id="protocolCol" text="Protocol" />
+                  <TableColumn fx:id="lengthCol" text="Length" />
+                  <TableColumn fx:id="infoCol" prefWidth="299.0" text="Info" />
+              </columns>
+            </TableView>
+            <TreeView fx:id="treeView" layoutX="49.0" layoutY="266.0" prefHeight="227.0" prefWidth="803.0" />
       </children>
     </AnchorPane>
   </children>

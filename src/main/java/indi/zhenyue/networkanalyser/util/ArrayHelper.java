@@ -4,6 +4,14 @@ import java.util.List;
 
 public class ArrayHelper {
 
+    public static int extractInteger(byte[] bytes, int pos, int cnt) {
+        int value = 0;
+        for (int i = 0; i < cnt; i++) {
+            value |= ((bytes[pos + cnt - i - 1] & 0xff) << 8 * i);
+        }
+        return value;
+    }
+
     public static int extractInteger(List<Byte> bytes, int pos, int cnt) {
         int value = 0;
         for (int i = 0; i < cnt; i++) {
