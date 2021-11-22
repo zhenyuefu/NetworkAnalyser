@@ -2,12 +2,16 @@ package indi.zhenyue.networkanalyser.packet;
 
 import javafx.beans.property.SimpleStringProperty;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Frame {
 
     public static int cpt = 0;
     private final SimpleStringProperty id, time, src, dest, protocol, length, info;
+    private final List<Byte> bytes;
 
-    public Frame(String time, String src, String dest, String protocol, String length, String info) {
+    public Frame(String time, String src, String dest, String protocol, String length, String info, List<Byte> bytes) {
         this.id = new SimpleStringProperty(++cpt + "");
         this.time = new SimpleStringProperty(time);
         this.src = new SimpleStringProperty(src);
@@ -15,6 +19,8 @@ public class Frame {
         this.protocol = new SimpleStringProperty(protocol);
         this.length = new SimpleStringProperty(length);
         this.info = new SimpleStringProperty(info);
+        this.bytes = new ArrayList<>();
+        this.bytes.addAll(bytes);
     }
 
     public String getId() {
@@ -71,6 +77,10 @@ public class Frame {
 
     public void setInfo(String info) {
         this.info.set(info);
+    }
+
+    public List<Byte> getbytes() {
+        return this.bytes;
     }
 
     /*

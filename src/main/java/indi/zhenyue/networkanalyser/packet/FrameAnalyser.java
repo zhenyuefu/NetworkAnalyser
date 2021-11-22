@@ -100,7 +100,7 @@ public class FrameAnalyser {
             protocol = "TCP";
         }
         String len = "" + ArrayHelper.extractInteger(bytes, 16, 2);
-        addFrame(new Frame(String.format("%.6f", timeCurrent), ipsrc, ipdest, protocol, len, "1"));
+        addFrame(new Frame(String.format("%.6f", timeCurrent), ipsrc, ipdest, protocol, len, "1",bytes));
     }
 
     public void addFrame(Frame f) {

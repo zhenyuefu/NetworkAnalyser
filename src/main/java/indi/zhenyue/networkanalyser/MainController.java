@@ -1,7 +1,10 @@
 package indi.zhenyue.networkanalyser;
 
+import indi.zhenyue.networkanalyser.packet.ContentFrame;
 import indi.zhenyue.networkanalyser.packet.Frame;
 import indi.zhenyue.networkanalyser.packet.FrameAnalyser;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
@@ -22,6 +25,7 @@ public class MainController {
     @FXML private ScrollPane scrollPane;
     @FXML private TableView<Frame> tableViewFrame;
     @FXML private TableColumn numCol, timeCol, srcCol, destCol, protocolCol, lengthCol, infoCol;
+    @FXML private TreeView<String> treeView;
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -40,6 +44,12 @@ public class MainController {
         if (packetFile != null) {
             //networkPacketLabel.setText(openFile(packetFile));
             FrameAnalyser fa = new FrameAnalyser(openFile(packetFile), tableViewFrame,numCol, timeCol, srcCol, destCol, protocolCol, lengthCol, infoCol);
+            tableViewFrame.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Frame>() {
+                @Override
+                public void changed(ObservableValue<? extends Frame> observableValue, Frame frame, Frame newFrame) {
+                    new ContentFrame(treeView, newFrame);
+                }
+            });
         }
     }
 
