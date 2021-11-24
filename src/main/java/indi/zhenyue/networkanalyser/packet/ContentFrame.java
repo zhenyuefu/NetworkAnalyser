@@ -11,14 +11,13 @@ public class ContentFrame {
 
     private final TreeView<String> treeView;
     private final Frame frame;
-    private final List<Byte> bytes;
+    private final byte[] bytes;
     private final List<TreeItem<String>> treeItems;
 
-    public ContentFrame(TreeView<String> treeView, Frame frame) {
+    public ContentFrame(TreeView<String> treeView, Frame frame, Packet packet) {
         this.treeView = treeView;
         this.frame = frame;
-        this.bytes = new ArrayList<>();
-        this.bytes.addAll(frame.getbytes());
+        this.bytes = packet.getBytes();
         this.treeItems = new ArrayList<>();
         analyserContent();
     }
@@ -32,6 +31,7 @@ public class ContentFrame {
         sousItem = new TreeItem<>("Interface id: 0 (known)");
         sousItem.getChildren().add(new TreeItem<>("Interface name: unknown"));
         treeItems.get(1).getChildren().add(sousItem);
+
 /*
 
         treeItems.add(new TreeItem<>("Ethernet II, Src: " + MACAddress.extract(6) + ", Dest: " + MACAddress.extract(0)));
@@ -69,7 +69,7 @@ public class ContentFrame {
         treeItems.get(2).getChildren().addAll(sousItemsList);
 
 
-
+ */
         for (int i = 1; i < treeItems.size(); i++) {
             treeItemRoot.getChildren().add(treeItems.get(i));
         }
@@ -77,7 +77,7 @@ public class ContentFrame {
         treeView.setShowRoot(false);
         treeView.setRoot(treeItemRoot);
 
- */
+
     }
 
 

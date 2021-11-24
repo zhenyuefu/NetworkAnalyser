@@ -9,8 +9,6 @@ public class IPPacket extends EthernetPacket {
     protected int ipHeaderLength;
     protected String ipAddressSource;
     protected String ipAddressDestination;
-    protected int version;
-    private boolean versionSet = false;
 
     public IPPacket(byte[] bytes) {
         super(bytes);
@@ -26,10 +24,12 @@ public class IPPacket extends EthernetPacket {
 
     public String getIpAddressDestination() {
         if (ipAddressDestination == null)
-            ipAddressDestination = IPAddress.toString(ArrayHelper.extractInteger(bytes, ethOffset + 8, 4));
+            ipAddressDestination = IPAddress.toString(ArrayHelper.extractInteger(bytes, ethOffset + 16, 4));
         return ipAddressDestination;
     }
 
+    private int version;
+    private boolean versionSet = false;
     public int getVersion() {
         if (!versionSet) {
             version = (ArrayHelper.extractInteger(bytes, ethOffset, 1) >> 4) & 0xf;
@@ -50,6 +50,43 @@ public class IPPacket extends EthernetPacket {
         totalLength = ArrayHelper.extractInteger(bytes, ethOffset+2, 2);
         return totalLength;
     }
+
+    private int identification;
+    public int getIdentification(){
+        identification = ArrayHelper.extractInteger(bytes, ethOffset+4, 2);
+        return identification;
+    }
+
+    private int flag;
+    public int getFlag(){
+        flag = ArrayHelper.extractInteger(bytes, ethOffset+6, 1);
+        return flag;
+    }
+
+    private int flagOffset;
+    public int getFlagOffset(){
+        flagOffset = ArrayHelper.extractInteger(bytes, ethOffset+7, 1);
+        return flagOffset;
+    }
+
+    private int timeToLive;
+    public int getTimeToLive(){
+        timeToLive = ArrayHelper.extractInteger(bytes, ethOffset+8, 1);
+        return timeToLive;
+    }
+
+    private int protocolIP;
+    public int getProtocolIP(){
+        protocolIP = ArrayHelper.extractInteger(bytes, ethOffset+9, 1);
+        return protocolIP;
+    }
+
+    private int headerChecksum;
+    public int getHeaderChecksum(){
+        headerChecksum = ArrayHelper.extractInteger(bytes, ethOffset+10, 2);
+        return headerChecksum;
+    }
+
 
 
 }

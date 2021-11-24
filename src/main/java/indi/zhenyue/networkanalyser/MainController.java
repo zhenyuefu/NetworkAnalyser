@@ -44,14 +44,16 @@ public class MainController {
         if (packetFile != null) {
             //networkPacketLabel.setText(openFile(packetFile));
             FrameAnalyser fa = new FrameAnalyser(openFile(packetFile), tableViewFrame,numCol, timeCol, srcCol, destCol, protocolCol, lengthCol, infoCol);
+            PacketAnalyser pa = new PacketAnalyser();
+            List<Packet> listPackets = pa.parse(FileUtility.readFile(packetFile));
             tableViewFrame.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Frame>() {
                 @Override
                 public void changed(ObservableValue<? extends Frame> observableValue, Frame frame, Frame newFrame) {
-                    new ContentFrame(treeView, newFrame);
+                    new ContentFrame(treeView, newFrame, listPackets.get(Integer.parseInt(newFrame.getId())-1));
                 }
             });
-            PacketAnalyser pa = new PacketAnalyser();
-            List<Packet> list = pa.parse(FileUtility.readFile(packetFile));
+
+
 
 
         }
