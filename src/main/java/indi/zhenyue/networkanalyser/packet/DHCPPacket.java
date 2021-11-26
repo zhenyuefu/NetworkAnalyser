@@ -8,13 +8,30 @@ public class DHCPPacket extends UDPPacket {
     }
 
     private int messageType;
-    public int getMessageType(){
+    public int getIntMessageType(){
         messageType = bytes[udpOffset]; //ArrayHelper.extractInteger(bytes, ipOffset+6, 2);
         return messageType;
     }
 
-    public int getHardwareType(){
+    public String getMessageType(){
+        messageType = getIntMessageType();
+        return switch (messageType){
+            case 1 -> "Boot Request (1)";
+            case 2 -> "Boot Reply (2)";
+            default -> "";
+        };
+    }
+
+    public int getIntHardwareType(){
         return bytes[udpOffset+1];
+    }
+
+    public String getHardwareType(){
+        int hardwareType = getIntHardwareType();
+        return switch (hardwareType){
+            case 1 -> "Ethernet (0x01)";
+            default -> "";
+        };
     }
 
     public int getHardwareAddressLength(){

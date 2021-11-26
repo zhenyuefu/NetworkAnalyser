@@ -38,6 +38,10 @@ public class IPPacket extends EthernetPacket {
         return version;
     }
 
+    public int getHeaderLength() {
+        return ipHeaderLength;
+    }
+
     private String differentiatedServices;
     public String getDifferentiatedServices() {
         if (differentiatedServices == null)
@@ -63,10 +67,40 @@ public class IPPacket extends EthernetPacket {
         return flag;
     }
 
-    private int flagOffset;
-    public int getFlagOffset(){
-        flagOffset = ArrayHelper.extractInteger(bytes, ethOffset+7, 1);
-        return flagOffset;
+    public String getFlagReservedBit(){
+        flag = getFlag();
+        int bit = (flag >> 7)&0b1;
+        return switch (bit){
+            case 0 -> "0... .... = Reserved bit: Not set";
+            case 1 -> "1... .... = Reserved bit: Set";
+            default -> "";
+        };
+    }
+
+    public String getFlagDontFragment(){
+        flag = getFlag();
+        int bit = (flag >> 6)&0b1;
+        return switch (bit){
+            case 0 -> ".0.. .... = Don't fragment: Not set";
+            case 1 -> ".1.. .... = Don't fragment: Set";
+            default -> "";
+        };
+    }
+
+    public String getFlagMoreFragments(){
+        flag = getFlag();
+        int bit = (flag >> 5)&0b1;
+        return switch (bit){
+            case 0 -> "..0. .... = More fragments: Not set";
+            case 1 -> "..1. .... = More fragments: Set";
+            default -> "";
+        };
+    }
+
+    private int fragmentOffset;
+    public int getFragmentOffset(){
+        fragmentOffset = ArrayHelper.extractInteger(bytes, ethOffset+7, 1);
+        return fragmentOffset;
     }
 
     private int timeToLive;
@@ -76,9 +110,17 @@ public class IPPacket extends EthernetPacket {
     }
 
     private int protocolIP;
-    public int getProtocolIP(){
+    public int getIntProtocolIP(){
         protocolIP = ArrayHelper.extractInteger(bytes, ethOffset+9, 1);
         return protocolIP;
+    }
+
+    public String getProtocolIP(){
+        protocolIP = ArrayHelper.extractInteger(bytes, ethOffset+9, 1);
+        return switch (protocolIP){
+            case 17 -> "UDP";
+            default -> "";
+        };
     }
 
     private int headerChecksum;

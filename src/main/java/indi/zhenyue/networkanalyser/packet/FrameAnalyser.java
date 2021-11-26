@@ -7,8 +7,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +18,6 @@ public class FrameAnalyser {
     private final String dataFrame;
     private final List<Byte> bytes = new ArrayList<>();
     private double timeBegin;
-    private double timeCurrent;
 
     public FrameAnalyser(String dataFrame, TableView<Frame> tableViewFrame, TableColumn<Frame, String> numCol,
         TableColumn<Frame, String> timeCol, TableColumn<Frame, String> srcCol, TableColumn<Frame, String> destCol,
@@ -38,14 +35,6 @@ public class FrameAnalyser {
         this.infoCol = infoCol;
         init();
         analyser();
-    }
-
-    public static short getUnsignedByteValue(final byte x) {
-        ByteBuffer tmpBuffer = ByteBuffer.allocate(2);
-        tmpBuffer.put(new byte[] {0x00, x});
-        tmpBuffer.flip();
-        tmpBuffer.order(ByteOrder.BIG_ENDIAN);
-        return tmpBuffer.getShort();
     }
 
     public void init() {
@@ -92,7 +81,7 @@ public class FrameAnalyser {
     }
 
     private void extractFrame() {
-        timeCurrent = (System.nanoTime() - timeBegin) / 1000000000;
+        double timeCurrent = (System.nanoTime() - timeBegin) / 1000000000;
         String ipsrc = IPAddress.toString(ArrayHelper.extractInteger(bytes, 26, 4));
         String ipdest = IPAddress.toString(ArrayHelper.extractInteger(bytes, 30, 4));
         String protocol = null;

@@ -27,7 +27,15 @@ public class EthernetPacket extends Packet {
         return macAddressDestination;
     }
 
-    public String getLGBit(int address) {
+    public long getIntMacAddressSource(){
+        return ArrayHelper.extractIntegerLong(bytes,6,6);
+    }
+
+    public long getIntMacAddressDestination(){
+        return ArrayHelper.extractIntegerLong(bytes,0,6);
+    }
+
+    public String getLGBit(long address) {
         return switch (getNumBinaryAt(address, 7)) {
             case 0 -> ".... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)";
             case 1 -> ".... ..1. .... .... .... .... = LG bit: Locally administered address (this is NOT the factory default)";
@@ -35,7 +43,7 @@ public class EthernetPacket extends Packet {
         };
     }
 
-    public String getIGBit(int address) {
+    public String getIGBit(long address) {
         return switch (getNumBinaryAt(address, 8)) {
             case 0 -> ".... ...0 .... .... .... .... = IG bit: Individual address (unicast)";
             case 1 -> ".... ...1 .... .... .... .... = IG bit: Group address (multicast/broadcast)";
@@ -43,13 +51,20 @@ public class EthernetPacket extends Packet {
         };
     }
 
-    public int getNumBinaryAt(int address, int num) {
-        address = address >> (24 - num);
-        return address & 0b1;
+    public int getNumBinaryAt(long address, int num) {
+        address = address >> (48 - num);
+        return (int)address & 0b1;
     }
 
     public int getProtocol() {
         return protocol;
+    }
+
+    public String getType(){
+        return switch(protocol){
+            case 0x0800 -> "IPv4";
+            default -> "";
+        };
     }
 
 
