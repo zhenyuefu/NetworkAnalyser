@@ -57,17 +57,32 @@ public class DHCPPacket extends UDPPacket {
     }
 
     public String getBroadcastFlag(){
+        return (bootpFlags>>15) +"... .... .... .... = Broadcast flag: "+getBroadcast();
+
+    }
+
+    public String getBroadcast(){
         return switch (bootpFlags>>15){
-            case 0 -> "0... .... .... .... = Broadcast flag: Unicast";
-            case 1 -> "1... .... .... .... = Broadcast flag: Broadcast";
+            case 0 -> "Unicast";
+            case 1 -> "Broadcast";
             default -> null;
         };
     }
 
     private int reservedFlags;
-    public int getReservedFlags(){
+    public int getIntReservedFlags(){
         reservedFlags = bootpFlags & 0x7fff;
         return reservedFlags;
+    }
+
+    public String getReservedFlags(){
+        reservedFlags = getIntReservedFlags();
+        return String.format(".%03d %04d %04d %04d = Reserved flags: 0x%04x",
+                Integer.parseInt(Integer.toBinaryString(reservedFlags >> 12)),
+                Integer.parseInt(Integer.toBinaryString((reservedFlags >> 8)& 0xf)),
+                Integer.parseInt(Integer.toBinaryString((reservedFlags >> 4)& 0xf)),
+                Integer.parseInt(Integer.toBinaryString(reservedFlags & 0xf)),
+                reservedFlags);
     }
 
     private String clientIPAddress;
@@ -117,11 +132,20 @@ public class DHCPPacket extends UDPPacket {
         return ArrayHelper.extractInteger(bytes,udpOffset+108,16*8);
     }
 
-    public int getMagicCookie(){
+    public int getIntMagicCookie(){
         return ArrayHelper.extractInteger(bytes,udpOffset+236,4);
     }
 
+    public String getMagicCookie(){
+        if(getIntMagicCookie()==0x63825363)
+            return "DHCP";
+        return "";
+    }
+
     private int option;
+    public void generateOption(){
+
+    }
 
 
 

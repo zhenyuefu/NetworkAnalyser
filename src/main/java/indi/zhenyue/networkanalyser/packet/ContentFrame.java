@@ -96,15 +96,21 @@ public class ContentFrame {
                     sousItemsList[3] = new TreeItem<>("Hops: "+dhcpPacket.getHops());
                     sousItemsList[4] = new TreeItem<>("Transaction ID: "+String.format("0x%08x",dhcpPacket.getTransactionID()));
                     sousItemsList[5] = new TreeItem<>("Seconds elapsed: "+dhcpPacket.getSecondsElapsed());
-                    sousItemsList[6] = new TreeItem<>("Bootp flags: "+String.format("0x%04x",dhcpPacket.getBootpFlags()));
+                    sousItemsList[6] = new TreeItem<>("Bootp flags: "+String.format("0x%04x",dhcpPacket.getBootpFlags())+" ("+dhcpPacket.getBroadcast()+")");
                     sousItemsList[6].getChildren().add(new TreeItem<>(dhcpPacket.getBroadcastFlag()));
+                    sousItemsList[6].getChildren().add(new TreeItem<>(dhcpPacket.getReservedFlags()));
                     sousItemsList[7] = new TreeItem<>("Client IP address: "+dhcpPacket.getClientIPAddress());
                     sousItemsList[8] = new TreeItem<>("Your (client) IP address: "+dhcpPacket.getYourIPAddress());
                     sousItemsList[9] = new TreeItem<>("Next server IP address: "+dhcpPacket.getNextServerIPAddress());
                     sousItemsList[10] = new TreeItem<>("Relay agent IP address: "+dhcpPacket.getRelayAgentIPAddress());
                     sousItemsList[11] = new TreeItem<>("Client MAC address: "+dhcpPacket.getClientMACAddress());
                     sousItemsList[12] = new TreeItem<>("Client hardware address padding: "+dhcpPacket.getClientHardwareAddressPadding());
-                    sousItemsList[13] = new TreeItem<>();
+                    sousItemsList[13] = new TreeItem<>("Server host name: "+dhcpPacket.getServerHostName());
+                    sousItemsList[14] = new TreeItem<>("Boot file name: "+dhcpPacket.getBootFileName());
+                    sousItemsList[15] = new TreeItem<>("Magic cookie: "+dhcpPacket.getMagicCookie());
+                    sousItemsList[16] = new TreeItem<>();
+                    sousItemsList[17] = new TreeItem<>();
+                    sousItemsList[18] = new TreeItem<>();
 
                     treeItems.get(5).getChildren().addAll(sousItemsList);
                 }
