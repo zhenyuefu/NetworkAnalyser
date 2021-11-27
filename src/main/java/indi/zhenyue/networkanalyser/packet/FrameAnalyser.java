@@ -91,7 +91,8 @@ public class FrameAnalyser {
         String ipdest = IPAddress.toString(ArrayHelper.extractInteger(bytes, 30, 4));
         String protocol = cf.getProtocol();
         String len = "" + bytes.size();
-        addFrame(new Frame(String.format("%.6f", timeCurrent), ipsrc, ipdest, protocol, len, "1", bytes));
+        String info = cf.getInfo();
+        addFrame(new Frame(String.format("%.6f", timeCurrent), ipsrc, ipdest, protocol, len, info, bytes));
     }
 
     public void addFrame(Frame f) {

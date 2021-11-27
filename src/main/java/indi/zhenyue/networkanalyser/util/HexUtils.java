@@ -4,7 +4,7 @@ import java.nio.charset.StandardCharsets;
 
 public class HexUtils {
     public static String byteToHexString(Byte src) {
-        StringBuilder stringBuilder = new StringBuilder("");
+        StringBuilder stringBuilder = new StringBuilder();
         if (src == null) {
             return null;
         }
@@ -19,12 +19,12 @@ public class HexUtils {
         return stringBuilder.toString();
     }
 
-    public static String bytesToHexString(byte[] src, int pos, int cnt){
-        StringBuilder stringBuilder = new StringBuilder("");
-        if (src == null || src.length <= pos+cnt) {
+    public static String bytesToHexString(byte[] src, int pos, int cnt) {
+        StringBuilder stringBuilder = new StringBuilder();
+        if (src == null || src.length <= pos + cnt) {
             return null;
         }
-        for (int i = pos; i < pos+cnt; i++) {
+        for (int i = pos; i < pos + cnt; i++) {
             int v = src[i] & 0xFF;
             String hv = Integer.toHexString(v);
             if (hv.length() < 2) {
@@ -54,28 +54,22 @@ public class HexUtils {
         return (byte) "0123456789ABCDEF".indexOf(c);
     }
 
-    public static String toStringHex(String s)
-    {
-        if("0x".equals(s.substring(0, 2)))
-        {
-            s =s.substring(2);
+    public static String toStringHex(String s) {
+        if ("0x".equals(s.substring(0, 2))) {
+            s = s.substring(2);
         }
-        byte[] baKeyword = new byte[s.length()/2];
-        for(int i = 0; i < baKeyword.length; i++)
-        {
-            try{
-                baKeyword[i] = (byte)(0xff & Integer.parseInt(s.substring(i*2, i*2+2),16));
-            }
-            catch(Exception e){
+        byte[] baKeyword = new byte[s.length() / 2];
+        for (int i = 0; i < baKeyword.length; i++) {
+            try {
+                baKeyword[i] = (byte) (0xff & Integer.parseInt(s.substring(i * 2, i * 2 + 2), 16));
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
-        try
-        {
+        try {
             s = new String(baKeyword, StandardCharsets.UTF_8);
-        }
-        catch (Exception e1){
+        } catch (Exception e1) {
             e1.printStackTrace();
         }
         return s;

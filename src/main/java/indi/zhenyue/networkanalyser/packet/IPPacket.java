@@ -30,6 +30,7 @@ public class IPPacket extends EthernetPacket {
 
     private int version;
     private boolean versionSet = false;
+
     public int getVersion() {
         if (!versionSet) {
             version = (ArrayHelper.extractInteger(bytes, ethOffset, 1) >> 4) & 0xf;
@@ -43,6 +44,7 @@ public class IPPacket extends EthernetPacket {
     }
 
     private String differentiatedServices;
+
     public String getDifferentiatedServices() {
         if (differentiatedServices == null)
             differentiatedServices = "0x" + HexUtils.byteToHexString(bytes[ethOffset + 1]);
@@ -50,47 +52,50 @@ public class IPPacket extends EthernetPacket {
     }
 
     private int totalLength;
+
     public int getTotalLength() {
-        totalLength = ArrayHelper.extractInteger(bytes, ethOffset+2, 2);
+        totalLength = ArrayHelper.extractInteger(bytes, ethOffset + 2, 2);
         return totalLength;
     }
 
     private int identification;
-    public int getIdentification(){
-        identification = ArrayHelper.extractInteger(bytes, ethOffset+4, 2);
+
+    public int getIdentification() {
+        identification = ArrayHelper.extractInteger(bytes, ethOffset + 4, 2);
         return identification;
     }
 
     private int flag;
-    public int getFlag(){
-        flag = ArrayHelper.extractInteger(bytes, ethOffset+6, 1);
+
+    public int getFlag() {
+        flag = ArrayHelper.extractInteger(bytes, ethOffset + 6, 1);
         return flag;
     }
 
-    public String getFlagReservedBit(){
+    public String getFlagReservedBit() {
         flag = getFlag();
-        int bit = (flag >> 7)&0b1;
-        return switch (bit){
+        int bit = (flag >> 7) & 0b1;
+        return switch (bit) {
             case 0 -> "0... .... = Reserved bit: Not set";
             case 1 -> "1... .... = Reserved bit: Set";
             default -> "";
         };
     }
 
-    public String getFlagDontFragment(){
+    public String getFlagDontFragment() {
         flag = getFlag();
-        int bit = (flag >> 6)&0b1;
-        return switch (bit){
+        int bit = (flag >> 6) & 0b1;
+        return switch (bit) {
             case 0 -> ".0.. .... = Don't fragment: Not set";
             case 1 -> ".1.. .... = Don't fragment: Set";
             default -> "";
         };
     }
 
-    public String getFlagMoreFragments(){
+    public String getFlagMoreFragments() {
         flag = getFlag();
-        int bit = (flag >> 5)&0b1;
-        return switch (bit){
+        int bit = (flag >> 5) & 0b1;
+        return switch (bit) {
             case 0 -> "..0. .... = More fragments: Not set";
             case 1 -> "..1. .... = More fragments: Set";
             default -> "";
@@ -98,37 +103,40 @@ public class IPPacket extends EthernetPacket {
     }
 
     private int fragmentOffset;
-    public int getFragmentOffset(){
-        fragmentOffset = ArrayHelper.extractInteger(bytes, ethOffset+7, 1);
+
+    public int getFragmentOffset() {
+        fragmentOffset = ArrayHelper.extractInteger(bytes, ethOffset + 7, 1);
         return fragmentOffset;
     }
 
     private int timeToLive;
-    public int getTimeToLive(){
-        timeToLive = ArrayHelper.extractInteger(bytes, ethOffset+8, 1);
+
+    public int getTimeToLive() {
+        timeToLive = ArrayHelper.extractInteger(bytes, ethOffset + 8, 1);
         return timeToLive;
     }
 
     private int protocolIP;
-    public int getIntProtocolIP(){
-        protocolIP = ArrayHelper.extractInteger(bytes, ethOffset+9, 1);
+
+    public int getIntProtocolIP() {
+        protocolIP = ArrayHelper.extractInteger(bytes, ethOffset + 9, 1);
         return protocolIP;
     }
 
-    public String getProtocolIP(){
-        protocolIP = ArrayHelper.extractInteger(bytes, ethOffset+9, 1);
-        return switch (protocolIP){
+    public String getProtocolIP() {
+        protocolIP = ArrayHelper.extractInteger(bytes, ethOffset + 9, 1);
+        return switch (protocolIP) {
             case 17 -> "UDP";
             default -> "";
         };
     }
 
     private int headerChecksum;
-    public int getHeaderChecksum(){
-        headerChecksum = ArrayHelper.extractInteger(bytes, ethOffset+10, 2);
+
+    public int getHeaderChecksum() {
+        headerChecksum = ArrayHelper.extractInteger(bytes, ethOffset + 10, 2);
         return headerChecksum;
     }
-
 
 
 }

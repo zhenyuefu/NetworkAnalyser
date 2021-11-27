@@ -14,6 +14,11 @@ public class DHCPPacket extends UDPPacket {
     }
 
     private int messageType;
+    private String dhcpMessageType;
+
+    public String getDhcpMessageType() {
+        return dhcpMessageType;
+    }
 
     public int getIntMessageType() {
         messageType = bytes[udpOffset]; //ArrayHelper.extractInteger(bytes, ipOffset+6, 2);
@@ -160,7 +165,7 @@ public class DHCPPacket extends UDPPacket {
         int option;
         int length;
         try {
-            while (bytes[i] != -1 || i >= bytes.length) {
+            while (bytes[i] != -1) {
                 option = ArrayHelper.extractInteger(bytes, i, 1);
                 length = bytes[i + 1];
                 switch (option) {
@@ -168,7 +173,7 @@ public class DHCPPacket extends UDPPacket {
                         String ip = IPAddress.toString(ArrayHelper.extractInteger(bytes, i + 2, 4));
                         sousItemsList.add(new TreeItem<>(String.format("Option: (%d) Subnet Mask (%s)", option, ip)));
                         sousItemsList.get(sousItemsList.size() - 1).getChildren().add(new TreeItem<>("Length: " + length));
-                        sousItemsList.get(sousItemsList.size() - 1).getChildren().add(new TreeItem<>("Subnet Mask: "+ip));
+                        sousItemsList.get(sousItemsList.size() - 1).getChildren().add(new TreeItem<>("Subnet Mask: " + ip));
                     }
                     case 2 -> {
                         sousItemsList.add(new TreeItem<>(String.format("Option: (%d) Time Offset", option)));
@@ -180,14 +185,14 @@ public class DHCPPacket extends UDPPacket {
                         String ip = IPAddress.toString(ArrayHelper.extractInteger(bytes, i + 2, 4));
                         sousItemsList.add(new TreeItem<>(String.format("Option: (%d) Router", option)));
                         sousItemsList.get(sousItemsList.size() - 1).getChildren().add(new TreeItem<>("Length: " + length));
-                        sousItemsList.get(sousItemsList.size() - 1).getChildren().add(new TreeItem<>("Router: "+ip));
+                        sousItemsList.get(sousItemsList.size() - 1).getChildren().add(new TreeItem<>("Router: " + ip));
                     }
                     case 6 -> {
                         sousItemsList.add(new TreeItem<>(String.format("Option: (%d) Domain Name Server", option)));
                         sousItemsList.get(sousItemsList.size() - 1).getChildren().add(new TreeItem<>("Length: " + length));
-                        for(int j=0; j<length/4; j++){
-                            String ip = IPAddress.toString(ArrayHelper.extractInteger(bytes, i + 2+j, 4));
-                            sousItemsList.get(sousItemsList.size() - 1).getChildren().add(new TreeItem<>("Domain Name Server: "+ip));
+                        for (int j = 0; j < length / 4; j++) {
+                            String ip = IPAddress.toString(ArrayHelper.extractInteger(bytes, i + 2 + j, 4));
+                            sousItemsList.get(sousItemsList.size() - 1).getChildren().add(new TreeItem<>("Domain Name Server: " + ip));
                         }
                     }
                     case 12 -> {
@@ -208,7 +213,7 @@ public class DHCPPacket extends UDPPacket {
                         sousItemsList.get(sousItemsList.size() - 1).getChildren().add(new TreeItem<>(String.format("IP Address Lease Time: (%ds) %s", second, TimeUtils.secondToTime(second))));
                     }
                     case 53 -> {
-                        String dhcpMessageType = switch (bytes[i + 2]) {
+                        dhcpMessageType = switch (bytes[i + 2]) {
                             case 3 -> "Request";
                             case 5 -> "ACK";
                             default -> "";
@@ -221,7 +226,7 @@ public class DHCPPacket extends UDPPacket {
                         String ip = IPAddress.toString(ArrayHelper.extractInteger(bytes, i + 2, 4));
                         sousItemsList.add(new TreeItem<>(String.format("Option: (%d) DHCP Server Identifier (%s)", option, ip)));
                         sousItemsList.get(sousItemsList.size() - 1).getChildren().add(new TreeItem<>("Length: " + length));
-                        sousItemsList.get(sousItemsList.size() - 1).getChildren().add(new TreeItem<>("DHCP Server Identifier: "+ip));
+                        sousItemsList.get(sousItemsList.size() - 1).getChildren().add(new TreeItem<>("DHCP Server Identifier: " + ip));
                     }
                     case 55 -> {
                         sousItemsList.add(new TreeItem<>(String.format("Option: (%d) Parameter Request List", option)));
@@ -280,7 +285,7 @@ public class DHCPPacket extends UDPPacket {
             sousItemsList.add(new TreeItem<>(String.format("Option: (%d) End", option)));
             sousItemsList.get(sousItemsList.size() - 1).getChildren().add(new TreeItem<>("Option End: " + option));
             i++;
-            if(i < bytes.length) {
+            if (i < bytes.length) {
                 int cnt = bytes.length - i;
                 sousItemsList.add(new TreeItem<>("Padding: " + String.format("%0" + 2 * cnt + "x", ArrayHelper.extractInteger(bytes, i, cnt))));
             }

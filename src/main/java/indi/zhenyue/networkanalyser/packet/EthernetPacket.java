@@ -27,12 +27,12 @@ public class EthernetPacket extends Packet {
         return macAddressDestination;
     }
 
-    public long getIntMacAddressSource(){
-        return ArrayHelper.extractIntegerLong(bytes,6,6);
+    public long getIntMacAddressSource() {
+        return ArrayHelper.extractIntegerLong(bytes, 6, 6);
     }
 
-    public long getIntMacAddressDestination(){
-        return ArrayHelper.extractIntegerLong(bytes,0,6);
+    public long getIntMacAddressDestination() {
+        return ArrayHelper.extractIntegerLong(bytes, 0, 6);
     }
 
     public String getLGBit(long address) {
@@ -53,15 +53,15 @@ public class EthernetPacket extends Packet {
 
     public int getNumBinaryAt(long address, int num) {
         address = address >> (48 - num);
-        return (int)address & 0b1;
+        return (int) address & 0b1;
     }
 
     public int getProtocol() {
         return protocol;
     }
 
-    public String getType(){
-        return switch(protocol){
+    public String getType() {
+        return switch (protocol) {
             case 0x0800 -> "IPv4";
             default -> "";
         };

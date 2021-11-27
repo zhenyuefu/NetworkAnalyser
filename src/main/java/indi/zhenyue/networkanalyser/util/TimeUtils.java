@@ -11,27 +11,27 @@ public class TimeUtils {
             sb.append(", ");
             second = second % 86400;
         }
-        if(second/3600>0){
-            sb.append(second/3600).append(" hour");
-            if(second/3600>1)
+        if (second / 3600 > 0) {
+            sb.append(second / 3600).append(" hour");
+            if (second / 3600 > 1)
                 sb.append("s");
             sb.append(", ");
             second = second % 3600;
         }
-        if(second/60>0){
-            sb.append(second/60).append(" minute");
-            if(second/60>1)
+        if (second / 60 > 0) {
+            sb.append(second / 60).append(" minute");
+            if (second / 60 > 1)
                 sb.append("s");
             sb.append(", ");
             second = second % 60;
         }
-        if(second>0){
+        if (second > 0) {
             sb.append(second).append(" second");
-            if(second>1)
+            if (second > 1)
                 sb.append("s");
             sb.append(", ");
         }
-        sb.deleteCharAt(sb.length()-2);
+        sb.deleteCharAt(sb.length() - 2);
         return sb.toString();
     }
 
