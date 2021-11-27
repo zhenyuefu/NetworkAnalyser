@@ -1,5 +1,7 @@
 package indi.zhenyue.networkanalyser.util;
 
+import java.nio.charset.StandardCharsets;
+
 public class HexUtils {
     public static String byteToHexString(Byte src) {
         StringBuilder stringBuilder = new StringBuilder("");
@@ -50,5 +52,32 @@ public class HexUtils {
 
     private static byte charToByte(char c) {
         return (byte) "0123456789ABCDEF".indexOf(c);
+    }
+
+    public static String toStringHex(String s)
+    {
+        if("0x".equals(s.substring(0, 2)))
+        {
+            s =s.substring(2);
+        }
+        byte[] baKeyword = new byte[s.length()/2];
+        for(int i = 0; i < baKeyword.length; i++)
+        {
+            try{
+                baKeyword[i] = (byte)(0xff & Integer.parseInt(s.substring(i*2, i*2+2),16));
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        try
+        {
+            s = new String(baKeyword, StandardCharsets.UTF_8);
+        }
+        catch (Exception e1){
+            e1.printStackTrace();
+        }
+        return s;
     }
 }

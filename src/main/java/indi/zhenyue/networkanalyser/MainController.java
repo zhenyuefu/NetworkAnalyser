@@ -20,12 +20,18 @@ import java.util.List;
  */
 public class MainController {
     private Stage stage;
-    @FXML private Label networkPacketLabel;
-    @FXML private MenuBar menuBar;
-    @FXML private ScrollPane scrollPane;
-    @FXML private TableView<Frame> tableViewFrame;
-    @FXML private TableColumn numCol, timeCol, srcCol, destCol, protocolCol, lengthCol, infoCol;
-    @FXML private TreeView<String> treeView;
+    @FXML
+    private Label networkPacketLabel;
+    @FXML
+    private MenuBar menuBar;
+    @FXML
+    private ScrollPane scrollPane;
+    @FXML
+    private TableView<Frame> tableViewFrame;
+    @FXML
+    private TableColumn<Frame, String> numCol, timeCol, srcCol, destCol, protocolCol, lengthCol, infoCol;
+    @FXML
+    private TreeView<String> treeView;
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -35,31 +41,23 @@ public class MainController {
         return menuBar;
     }
 
-    @FXML protected void menuOpenOnClick() {
+    @FXML
+    protected void menuOpenOnClick() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Network Frame File");
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("txt", "*.txt"),
-            new FileChooser.ExtensionFilter("All Files", "*.*"));
+                new FileChooser.ExtensionFilter("All Files", "*.*"));
         File packetFile = fileChooser.showOpenDialog(stage);
         if (packetFile != null) {
-            //networkPacketLabel.setText(openFile(packetFile));
-            FrameAnalyser fa = new FrameAnalyser(openFile(packetFile), tableViewFrame,numCol, timeCol, srcCol, destCol, protocolCol, lengthCol, infoCol);
             PacketAnalyser pa = new PacketAnalyser();
             List<Packet> listPackets = pa.parse(FileUtility.readFile(packetFile));
-            tableViewFrame.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Frame>() {
-                @Override
-                public void changed(ObservableValue<? extends Frame> observableValue, Frame frame, Frame newFrame) {
-                    new ContentFrame(treeView, newFrame, listPackets.get(Integer.parseInt(newFrame.getId())-1));
-                }
-            });
-
-
-
-
+            FrameAnalyser fa = new FrameAnalyser(openFile(packetFile), listPackets, tableViewFrame, numCol, timeCol, srcCol, destCol, protocolCol, lengthCol, infoCol);
+            tableViewFrame.getSelectionModel().selectedItemProperty().addListener((observableValue, frame, newFrame) -> new ContentFrame(treeView, newFrame, listPackets.get(Integer.parseInt(newFrame.getId()) - 1)));
         }
     }
 
-    @FXML protected void menuExitOnClick() {
+    @FXML
+    protected void menuExitOnClick() {
         stage.close();
     }
 
