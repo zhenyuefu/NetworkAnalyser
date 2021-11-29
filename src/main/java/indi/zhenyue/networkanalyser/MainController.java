@@ -13,6 +13,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,13 +26,12 @@ public class MainController {
     @FXML
     private MenuBar menuBar;
     @FXML
-    private ScrollPane scrollPane;
-    @FXML
     private TableView<Frame> tableViewFrame;
     @FXML
     private TableColumn<Frame, String> numCol, timeCol, srcCol, destCol, protocolCol, lengthCol, infoCol;
     @FXML
     private TreeView<String> treeView;
+    private List<Packet> listPackets;
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -50,9 +50,13 @@ public class MainController {
         File packetFile = fileChooser.showOpenDialog(stage);
         if (packetFile != null) {
             PacketAnalyser pa = new PacketAnalyser();
-            List<Packet> listPackets = pa.parse(FileUtility.readFile(packetFile));
+            listPackets = new ArrayList<>(pa.parse(FileUtility.readFile(packetFile)));
             FrameAnalyser fa = new FrameAnalyser(listPackets, tableViewFrame, numCol, timeCol, srcCol, destCol, protocolCol, lengthCol, infoCol);
-            tableViewFrame.getSelectionModel().selectedItemProperty().addListener((observableValue, frame, newFrame) -> new ContentFrame(treeView, newFrame, listPackets.get(Integer.parseInt(newFrame.getId()) - 1)));
+            tableViewFrame.getSelectionModel().selectedItemProperty().addListener((observableValue, frame, newFrame) -> {
+
+                new ContentFrame(treeView, newFrame, listPackets.get(Integer.parseInt(newFrame.getId()) - 1));
+
+            });
         }
     }
 
