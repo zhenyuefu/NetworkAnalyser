@@ -6,6 +6,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -53,11 +54,16 @@ public class MainController {
             listPackets = new ArrayList<>(pa.parse(FileUtility.readFile(packetFile)));
             FrameAnalyser fa = new FrameAnalyser(listPackets, tableViewFrame, numCol, timeCol, srcCol, destCol, protocolCol, lengthCol, infoCol);
             tableViewFrame.getSelectionModel().selectedItemProperty().addListener((observableValue, frame, newFrame) -> {
-
                 new ContentFrame(treeView, newFrame, listPackets.get(Integer.parseInt(newFrame.getId()) - 1));
-
             });
         }
+    }
+
+    @FXML
+    protected void menuExportOnClick(){
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setTitle("Export...");
+        File packetFile = directoryChooser.showDialog(stage);
     }
 
     @FXML
