@@ -2,12 +2,12 @@ package indi.zhenyue.networkanalyser.packet;
 
 import indi.zhenyue.networkanalyser.util.ArrayHelper;
 
-public class EthernetPacket extends Packet {
+public class EthernetPacket extends Packet implements EthernetProtocol {
 
     protected int ethOffset;
     protected String macAddressSource;
     protected String macAddressDestination;
-    private int protocol;
+    private final int protocol;
 
     public EthernetPacket(byte[] bytes) {
         super(bytes);
@@ -62,7 +62,10 @@ public class EthernetPacket extends Packet {
 
     public String getType() {
         return switch (protocol) {
-            case 0x0800 -> "IPv4";
+            case IP -> "IPv4";
+            case ARP -> "ARP";
+            case IPV6 -> "IPv6";
+            case MASK -> "MASK";
             default -> "";
         };
     }

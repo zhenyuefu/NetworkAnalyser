@@ -51,7 +51,7 @@ public class MainController {
         if (packetFile != null) {
             PacketAnalyser pa = new PacketAnalyser();
             List<Packet> listPackets = pa.parse(FileUtility.readFile(packetFile));
-            FrameAnalyser fa = new FrameAnalyser(openFile(packetFile), listPackets, tableViewFrame, numCol, timeCol, srcCol, destCol, protocolCol, lengthCol, infoCol);
+            FrameAnalyser fa = new FrameAnalyser(listPackets, tableViewFrame, numCol, timeCol, srcCol, destCol, protocolCol, lengthCol, infoCol);
             tableViewFrame.getSelectionModel().selectedItemProperty().addListener((observableValue, frame, newFrame) -> new ContentFrame(treeView, newFrame, listPackets.get(Integer.parseInt(newFrame.getId()) - 1)));
         }
     }

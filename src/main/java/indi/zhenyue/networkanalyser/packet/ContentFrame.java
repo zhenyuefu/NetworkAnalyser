@@ -24,7 +24,6 @@ public class ContentFrame {
         analyserContent();
     }
 
-
     public ContentFrame(TreeView<String> treeView, Frame frame, Packet packet) {
         this.treeView = treeView;
         this.frame = frame;

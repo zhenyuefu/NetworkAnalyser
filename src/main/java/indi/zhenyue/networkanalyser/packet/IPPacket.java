@@ -3,7 +3,7 @@ package indi.zhenyue.networkanalyser.packet;
 import indi.zhenyue.networkanalyser.util.ArrayHelper;
 import indi.zhenyue.networkanalyser.util.HexUtils;
 
-public class IPPacket extends EthernetPacket {
+public class IPPacket extends EthernetPacket implements IPProtocol {
 
     protected int ipOffset;
     protected int ipHeaderLength;
@@ -51,17 +51,19 @@ public class IPPacket extends EthernetPacket {
         return differentiatedServices;
     }
 
-    private int totalLength;
+    private int totalLength = -1;
 
     public int getTotalLength() {
-        totalLength = ArrayHelper.extractInteger(bytes, ethOffset + 2, 2);
+        if (totalLength == -1)
+            totalLength = ArrayHelper.extractInteger(bytes, ethOffset + 2, 2);
         return totalLength;
     }
 
-    private int identification;
+    private int identification = -1;
 
     public int getIdentification() {
-        identification = ArrayHelper.extractInteger(bytes, ethOffset + 4, 2);
+        if (identification == -1)
+            identification = ArrayHelper.extractInteger(bytes, ethOffset + 4, 2);
         return identification;
     }
 
@@ -102,17 +104,19 @@ public class IPPacket extends EthernetPacket {
         };
     }
 
-    private int fragmentOffset;
+    private int fragmentOffset = -1;
 
     public int getFragmentOffset() {
-        fragmentOffset = ArrayHelper.extractInteger(bytes, ethOffset + 7, 1);
+        if (fragmentOffset == -1)
+            fragmentOffset = ArrayHelper.extractInteger(bytes, ethOffset + 7, 1);
         return fragmentOffset;
     }
 
-    private int timeToLive;
+    private int timeToLive = -1;
 
     public int getTimeToLive() {
-        timeToLive = ArrayHelper.extractInteger(bytes, ethOffset + 8, 1);
+        if (timeToLive == -1)
+            timeToLive = ArrayHelper.extractInteger(bytes, ethOffset + 8, 1);
         return timeToLive;
     }
 
@@ -124,17 +128,24 @@ public class IPPacket extends EthernetPacket {
     }
 
     public String getProtocolIP() {
-        protocolIP = ArrayHelper.extractInteger(bytes, ethOffset + 9, 1);
+        protocolIP = getIntProtocolIP();
         return switch (protocolIP) {
-            case 17 -> "UDP";
+            case IPProtocol.IP -> "IPv4";
+            case IPProtocol.ICMP -> "ICMP";
+            case IPProtocol.TCP -> "TCP";
+            case IPProtocol.UDP -> "UDP";
+            case IPProtocol.IPV6 -> "IPv6";
+            case IPProtocol.MASK -> "Mask";
+            case IPProtocol.INVALID -> "Invalid";
             default -> "";
         };
     }
 
-    private int headerChecksum;
+    private int headerChecksum = -1;
 
     public int getHeaderChecksum() {
-        headerChecksum = ArrayHelper.extractInteger(bytes, ethOffset + 10, 2);
+        if (headerChecksum == -1)
+            headerChecksum = ArrayHelper.extractInteger(bytes, ethOffset + 10, 2);
         return headerChecksum;
     }
 
