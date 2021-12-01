@@ -9,26 +9,33 @@ import java.util.List;
 public class ContentFrame {
 
     private final TreeView<String> treeView;
-    private final Frame frame;
+    private int frame_id;
     private final byte[] bytes;
     private final List<TreeItem<String>> treeItems;
-
+    private TreeItem<String> treeItemRoot;
     private String protocol;
     private String info;
 
     public ContentFrame(Packet packet) {
         this.treeView = new TreeView<>();
-        this.frame = null;
         this.bytes = packet.getBytes();
         this.treeItems = new ArrayList<>();
         analyserContent();
     }
 
-    public ContentFrame(TreeView<String> treeView, Frame frame, Packet packet) {
-        this.treeView = treeView;
-        this.frame = frame;
+    public ContentFrame(int frame_id, Packet packet) {
+        this.treeView = new TreeView<>();
         this.bytes = packet.getBytes();
         this.treeItems = new ArrayList<>();
+        this.frame_id = frame_id;
+        analyserContent();
+    }
+
+    public ContentFrame(TreeView<String> treeView, int frame_id, Packet packet) {
+        this.treeView = treeView;
+        this.bytes = packet.getBytes();
+        this.treeItems = new ArrayList<>();
+        this.frame_id = frame_id;
         analyserContent();
     }
 
@@ -36,18 +43,14 @@ public class ContentFrame {
         TreeItem<String> sousItem;
         List<TreeItem<String>> sousItemsList;
 
-        TreeItem<String> treeItemRoot = new TreeItem<>();
+        treeItemRoot = new TreeItem<>();
         treeItems.add(treeItemRoot);
 
         // Frame
-        if (frame != null) {
-            treeItems.add(new TreeItem<>("Frame " + frame.getId() + ": " + frame.getLength() + " bytes on wire (" + Integer.parseInt(frame.getLength()) * 8 + " bits), " + frame.getLength() + " bytes captured (" + Integer.parseInt(frame.getLength()) * 8 + " bits) on interface unknown, id 0"));
-            sousItem = new TreeItem<>("Interface id: 0 (known)");
-            sousItem.getChildren().add(new TreeItem<>("Interface name: unknown"));
-            treeItems.get(1).getChildren().add(sousItem);
-        } else {
-            treeItems.add(new TreeItem<>("Frame "));
-        }
+        treeItems.add(new TreeItem<>(String.format("%s %d: %d bytes on wire (%d bits), %d bytes captured (%d bits) on interface unknown, id 0", "Frame ", frame_id, bytes.length, bytes.length * 8, bytes.length, bytes.length * 8)));
+        sousItem = new TreeItem<>("Interface id: 0 (known)");
+        sousItem.getChildren().add(new TreeItem<>("Interface name: unknown"));
+        treeItems.get(1).getChildren().add(sousItem);
 
         // Ethernet
         EthernetPacket ethernetPacket = new EthernetPacket(bytes);
@@ -149,24 +152,6 @@ public class ContentFrame {
                     sousItem.getChildren().add(new TreeItem<>(String.format("Type: %s (%d)", dnsPacket.getType(), dnsPacket.getIntType())));
                     sousItem.getChildren().add(new TreeItem<>(String.format("Class: %s (0x%04x)", dnsPacket.getQueriesClass(), dnsPacket.getIntQueriesClass())));
                     treeItems.get(5).getChildren().addAll(sousItemsList);
-
-                    /**
-                     *     Flags: 0x0100 Standard query
-                     *         0... .... .... .... = Response: Message is a query
-                     *         .000 0... .... .... = Opcode: Standard query (0)
-                     *         .... ..0. .... .... = Truncated: Message is not truncated
-                     *         .... ...1 .... .... = Recursion desired: Do query recursively
-                     *         .... .... .0.. .... = Z: reserved (0)
-                     *         .... .... ...0 .... = Non-authenticated data: Unacceptable
-                     *         db._dns-sd._udp.0.0.64.10.in-addr.arpa: type PTR, class IN
-                     *             Name: db._dns-sd._udp.0.0.64.10.in-addr.arpa
-                     *             [Name Length: 38]
-                     *             [Label Count: 9]
-                     *             Type: PTR (domain name PoinTeR) (12)
-                     *             Class: IN (0x0001)
-                     *     [Response In: 5]
-                     */
-
                     protocol = "DNS";
                     info = String.format("Standard query %s %s %s %s", dnsPacket.getFlagsResponse() ? "response " : "", dnsPacket.getTransactionID(), dnsPacket.getType(), dnsPacket.getName());
                 }
@@ -179,6 +164,10 @@ public class ContentFrame {
         treeItemRoot.setExpanded(true);
         treeView.setShowRoot(false);
         treeView.setRoot(treeItemRoot);
+    }
+
+    public TreeItem<String> getTreeItemRoot() {
+        return treeItemRoot;
     }
 
     public String getProtocol() {
