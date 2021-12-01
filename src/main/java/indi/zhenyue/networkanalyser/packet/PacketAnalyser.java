@@ -66,7 +66,7 @@ public class PacketAnalyser {
 
             for (String word : words) {
                 switch (state) {
-                    case INIT:
+                    case INIT -> {
                         try {
                             if (word.length() > 2) {
                                 int value = Integer.parseInt(word, BASE);
@@ -82,8 +82,8 @@ public class PacketAnalyser {
                             System.err.println(e.getMessage());
                         }
                         continue loop_line;
-
-                    case START_OF_LINE:
+                    }
+                    case START_OF_LINE -> {
                         try {
                             if (word.length() > 2) {
                                 int num = Integer.parseInt(word, BASE);
@@ -109,13 +109,14 @@ public class PacketAnalyser {
                             System.err.println(e.getMessage());
                         }
                         continue loop_line;
+                    }
 
-                        /* read offset */
-                    case READ_OFFSET:
+                    /* read offset */
+                    case READ_OFFSET -> {
                         try {
                             if (word.length() == 2) {
                                 int value = Integer.parseInt(word, BASE);
-                                byteBuffer.put((byte)value);
+                                byteBuffer.put((byte) value);
                                 curr_offset++;
                                 state = PARSER_STATE.READ_BYTE;
                                 break;
@@ -124,13 +125,12 @@ public class PacketAnalyser {
                             System.err.println(e.getMessage());
                         }
                         state = PARSER_STATE.READ_TEXT;
-                        break;
-
-                    case READ_BYTE:
+                    }
+                    case READ_BYTE -> {
                         try {
                             if (word.length() == 2) {
                                 int value = Integer.parseInt(word, BASE);
-                                byteBuffer.put((byte)value);
+                                byteBuffer.put((byte) value);
                                 curr_offset++;
                                 break;
                             }
@@ -138,13 +138,13 @@ public class PacketAnalyser {
                             System.err.println(e.getMessage());
                         }
                         state = PARSER_STATE.READ_TEXT;
-                        break;
-
-                    case READ_TEXT:
+                    }
+                    case READ_TEXT -> {
                         state = PARSER_STATE.START_OF_LINE;
                         continue loop_line;
-                    default:
-                        break;
+                    }
+                    default -> {
+                    }
                 }
 
             }

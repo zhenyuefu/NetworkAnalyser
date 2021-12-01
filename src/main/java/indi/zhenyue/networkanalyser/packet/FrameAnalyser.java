@@ -6,11 +6,11 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+
 import java.util.List;
 
 public class FrameAnalyser {
 
-    public static int cpt = 0;
     private final TableView<Frame> tableViewFrame;
     private final ObservableList<Frame> data;
     private final TableColumn<Frame, String> numCol, timeCol, srcCol, destCol, protocolCol, lengthCol, infoCol;

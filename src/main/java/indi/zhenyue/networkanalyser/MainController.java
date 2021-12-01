@@ -9,7 +9,6 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -49,7 +48,12 @@ public class MainController {
             listPackets.clear();
             listPackets.addAll(pa.parse(FileUtility.readFile(packetFile)));
             FrameAnalyser fa = new FrameAnalyser(listPackets, tableViewFrame, numCol, timeCol, srcCol, destCol, protocolCol, lengthCol, infoCol);
-            tableViewFrame.getSelectionModel().selectedItemProperty().addListener((observableValue, frame, newFrame) -> new ContentFrame(treeView, Integer.parseInt(newFrame.getId()), listPackets.get(Integer.parseInt(newFrame.getId()) - 1)));
+            tableViewFrame.getSelectionModel().selectedItemProperty().addListener((observableValue, frame, newFrame) -> {
+                try {
+                    new ContentFrame(treeView, Integer.parseInt(newFrame.getId()), listPackets.get(Integer.parseInt(newFrame.getId()) - 1));
+                } catch (NullPointerException ignored) {
+                }
+            });
         }
     }
 
@@ -112,17 +116,17 @@ public class MainController {
         return sb.toString();
     }
 
-    private String treeToString(TreeItem<String> root){
+    private String treeToString(TreeItem<String> root) {
         StringBuilder sb = new StringBuilder();
 
-        for(var item1 : root.getChildren()){
-            for (var item2 : item1.getChildren()){
+        for (var item1 : root.getChildren()) {
+            for (var item2 : item1.getChildren()) {
                 sb.append(item2.getValue()).append("\n");
-                for (var item3 : item2.getChildren()){
+                for (var item3 : item2.getChildren()) {
                     sb.append("\t").append(item3.getValue()).append("\n");
-                    for (var item4 : item3.getChildren()){
+                    for (var item4 : item3.getChildren()) {
                         sb.append("\t\t").append(item4.getValue()).append("\n");
-                        for (var item5 : item4.getChildren()){
+                        for (var item5 : item4.getChildren()) {
                             sb.append("\t\t\t").append(item5.getValue()).append("\n");
                         }
                     }

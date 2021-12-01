@@ -68,7 +68,7 @@ public class ContentFrame {
         treeItems.get(2).getChildren().addAll(sousItemsList);
 
         // IPv4
-        if (ethernetPacket.getProtocol() == 0x0800) {
+        if (ethernetPacket.getProtocol() == EthernetProtocol.IP) {
             IPPacket ipPacket = new IPPacket(bytes);
             treeItems.add(new TreeItem<>("Internet Protocol Version 4, Src: " + ipPacket.getIpAddressSource() + ", Dst: " + ipPacket.getIpAddressDestination()));
             sousItemsList = new ArrayList<>();
@@ -90,7 +90,7 @@ public class ContentFrame {
             treeItems.get(3).getChildren().addAll(sousItemsList);
 
             // UDP
-            if (ipPacket.getIntProtocolIP() == 17) {
+            if (ipPacket.getIntProtocolIP() == IPProtocol.UDP) {
                 UDPPacket udpPacket = new UDPPacket(bytes);
                 treeItems.add(new TreeItem<>("User Datagram Protocol, Src Port: " + udpPacket.getSourcePort() + ", Dst Port: " + udpPacket.getDestinationPort()));
                 sousItemsList = new ArrayList<>();
@@ -156,6 +156,24 @@ public class ContentFrame {
                     info = String.format("Standard query %s %s %s %s", dnsPacket.getFlagsResponse() ? "response " : "", dnsPacket.getTransactionID(), dnsPacket.getType(), dnsPacket.getName());
                 }
             }
+
+            // TCP
+            if (ipPacket.getIntProtocolIP() == IPProtocol.TCP) {
+                protocol = "TCP";
+                info = " ";
+            }
+
+            // ICMP
+            if (ipPacket.getIntProtocolIP() == IPProtocol.ICMP) {
+                protocol = "ICMP";
+                info = " ";
+            }
+        }
+
+        // ARP
+        if (ethernetPacket.getProtocol() == EthernetProtocol.ARP) {
+            protocol = "ARP";
+            info = " ";
         }
 
         for (int i = 1; i < treeItems.size(); i++) {
