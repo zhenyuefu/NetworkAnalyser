@@ -25,14 +25,14 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            asset_name: analyser-linux-amd64
-            compress_name: analyser-linux-amd64
+            asset_name: analyser-linux
+            compress_name: analyser-linux
           - os: windows-latest
-            asset_name: analyser-windows-amd64
-            compress_name: analyser-windows-amd64
+            asset_name: analyser-windows
+            compress_name: analyser-windows
           - os: macos-11
-            asset_name: analyser-macos-amd64
-            compress_name: analyser-macos-amd64.app
+            asset_name: analyser-macos
+            compress_name: analyser-macos.app
     runs-on: ${{ matrix.os }}
 
     steps:
