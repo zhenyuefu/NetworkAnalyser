@@ -49,7 +49,7 @@ jobs:
 
     - name: package
       working-directory: target
-      run: jpackage --runtime-image image --type app-image -n ${{ matrix.asset_name }} -m indi.zhenyue.networkanalyser/indi.zhenyue.networkanalyser.Launcher
+      run: jpackage --runtime-image image --type app-image -n ${{ matrix.asset_name }} -m Networkanalyser/projectreseau.networkanalyser.Launcher
 
     - name: Archive Release
       uses: thedoctor0/zip-release@master
