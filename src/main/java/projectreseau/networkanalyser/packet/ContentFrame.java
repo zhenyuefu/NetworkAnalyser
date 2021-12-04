@@ -1,4 +1,4 @@
-package indi.zhenyue.networkanalyser.packet;
+package projectreseau.networkanalyser.packet;
 
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;

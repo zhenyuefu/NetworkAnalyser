@@ -12,7 +12,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.8.1</junit.version>
-        <exec.mainClass>Networkanalyser/indi.zhenyue.networkanalyser.Launcher</exec.mainClass>
+        <exec.mainClass>Networkanalyser/projectreseau.networkanalyser.Launcher</exec.mainClass>
 
     </properties>
 
@@ -62,7 +62,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>Networkanalyser/indi.zhenyue.networkanalyser.Launcher
+                            <mainClass>Networkanalyser/projectreseau.networkanalyser.Launcher
                             </mainClass>
                             <stripDebug>true</stripDebug>
                             <compress>2</compress>

@@ -1,4 +1,4 @@
-package indi.zhenyue.networkanalyser.packet;
+package projectreseau.networkanalyser.packet;
 
 public class IPAddress {
 

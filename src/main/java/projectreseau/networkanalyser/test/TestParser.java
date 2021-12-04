@@ -1,8 +1,8 @@
-package indi.zhenyue.networkanalyser.test;
+package projectreseau.networkanalyser.test;
 
-import indi.zhenyue.networkanalyser.packet.Packet;
-import indi.zhenyue.networkanalyser.packet.PacketAnalyser;
-import indi.zhenyue.networkanalyser.util.FileUtility;
+import projectreseau.networkanalyser.packet.Packet;
+import projectreseau.networkanalyser.packet.PacketAnalyser;
+import projectreseau.networkanalyser.util.FileUtility;
 
 import java.io.File;
 import java.util.List;

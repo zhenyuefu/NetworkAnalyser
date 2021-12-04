@@ -1,7 +1,7 @@
-package indi.zhenyue.networkanalyser.packet;
+package projectreseau.networkanalyser.packet;
 
-import indi.zhenyue.networkanalyser.util.ArrayHelper;
-import indi.zhenyue.networkanalyser.util.HexUtils;
+import projectreseau.networkanalyser.util.ArrayHelper;
+import projectreseau.networkanalyser.util.HexUtils;
 
 public class IPPacket extends EthernetPacket implements IPProtocol {
 
@@ -131,12 +131,12 @@ public class IPPacket extends EthernetPacket implements IPProtocol {
         protocolIP = getIntProtocolIP();
         return switch (protocolIP) {
             case IPProtocol.IP -> "IPv4";
-            case IPProtocol.ICMP -> "ICMP";
-            case IPProtocol.TCP -> "TCP";
-            case IPProtocol.UDP -> "UDP";
+            case ICMP -> "ICMP";
+            case TCP -> "TCP";
+            case UDP -> "UDP";
             case IPProtocol.IPV6 -> "IPv6";
             case IPProtocol.MASK -> "Mask";
-            case IPProtocol.INVALID -> "Invalid";
+            case INVALID -> "Invalid";
             default -> "";
         };
     }

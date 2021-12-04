@@ -1,6 +1,6 @@
-package indi.zhenyue.networkanalyser.packet;
+package projectreseau.networkanalyser.packet;
 
-import indi.zhenyue.networkanalyser.util.ArrayHelper;
+import projectreseau.networkanalyser.util.ArrayHelper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;

@@ -1,7 +1,7 @@
-package indi.zhenyue.networkanalyser.packet;
+package projectreseau.networkanalyser.packet;
 
-import indi.zhenyue.networkanalyser.util.ArrayHelper;
-import indi.zhenyue.networkanalyser.util.HexUtils;
+import projectreseau.networkanalyser.util.ArrayHelper;
+import projectreseau.networkanalyser.util.HexUtils;
 
 import java.util.Objects;
 

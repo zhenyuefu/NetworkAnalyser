@@ -1,7 +1,7 @@
-package indi.zhenyue.networkanalyser;
+package projectreseau.networkanalyser;
 
-import indi.zhenyue.networkanalyser.packet.*;
-import indi.zhenyue.networkanalyser.util.FileUtility;
+import projectreseau.networkanalyser.packet.*;
+import projectreseau.networkanalyser.util.FileUtility;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;

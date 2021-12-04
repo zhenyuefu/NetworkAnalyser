@@ -1,4 +1,4 @@
-package indi.zhenyue.networkanalyser.packet;
+package projectreseau.networkanalyser.packet;
 
 public interface EthernetProtocol {
     int IP = 0x0800;

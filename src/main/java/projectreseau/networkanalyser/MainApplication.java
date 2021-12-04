@@ -1,4 +1,4 @@
-package indi.zhenyue.networkanalyser;
+package projectreseau.networkanalyser;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

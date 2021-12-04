@@ -46,9 +46,59 @@ Dans le répertoire du projet, il suffit d'exécuter la commande suivante pour l
 
 
 
+## File Structure
+
+```bash
+.
+├── 1.txt       # example input file
+├── 2.txt       # example input file
+├── README.md
+├── export.txt  # example output file
+├── package.sh
+├── pom.xml     # maven config
+└── src
+    └── main
+        ├── java
+        │   ├── module-info.java
+        │   └── projectreseau
+        │       └── networkanalyser
+        │           ├── Launcher.java
+        │           ├── MainApplication.java
+        │           ├── MainController.java         # UI Controler
+        │           ├── packet
+        │           │   ├── ContentFrame.java
+        │           │   ├── DHCPPacket.java
+        │           │   ├── DNSPacket.java
+        │           │   ├── EthernetPacket.java
+        │           │   ├── EthernetProtocol.java
+        │           │   ├── Frame.java
+        │           │   ├── FrameAnalyser.java       # Alalyse the packet and show on gui
+        │           │   ├── IPAddress.java
+        │           │   ├── IPPacket.java
+        │           │   ├── IPProtocol.java
+        │           │   ├── MACAddress.java
+        │           │   ├── Packet.java
+        │           │   ├── PacketAnalyser.java      # handle input file to packets
+        │           │   └── UDPPacket.java
+        │           ├── test
+        │           │   └── TestParser.java
+        │           └── util
+        │               ├── ArrayHelper.java
+        │               ├── FileUtility.java
+        │               ├── HexUtils.java
+        │               └── TimeUtils.java
+        └── resources
+            └── projectreseau
+                └── networkanalyser
+                    └── net.fxml
+
+```
+
+
+
 ## Collaborator
 
 <a href = "https://github.com/Tanu-N-Prabhu/Python/graphs/contributors">
-  <img src = "https://contrib.rocks/image?repo=zhenyuefu/NetworkAnalyser"/>
+  <img src = "https://contrib.rocks/image?repo=zhenyuefu/NetworkAnalyser" alt=""/>
 </a>
 

@@ -1,4 +1,4 @@
-package indi.zhenyue.networkanalyser.util;
+package projectreseau.networkanalyser.util;
 
 import java.io.File;
 import java.io.FileInputStream;

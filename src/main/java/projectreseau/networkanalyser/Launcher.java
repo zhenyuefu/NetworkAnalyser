@@ -1,4 +1,4 @@
-package indi.zhenyue.networkanalyser;
+package projectreseau.networkanalyser;
 
 /**
  * @author zhenyue

@@ -1,6 +1,6 @@
-package indi.zhenyue.networkanalyser.packet;
+package projectreseau.networkanalyser.packet;
 
-import indi.zhenyue.networkanalyser.util.HexUtils;
+import projectreseau.networkanalyser.util.HexUtils;
 
 public class MACAddress {
 

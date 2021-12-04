@@ -1,6 +1,6 @@
-package indi.zhenyue.networkanalyser.packet;
+package projectreseau.networkanalyser.packet;
 
-import indi.zhenyue.networkanalyser.util.ArrayHelper;
+import projectreseau.networkanalyser.util.ArrayHelper;
 
 public class EthernetPacket extends Packet implements EthernetProtocol {
 

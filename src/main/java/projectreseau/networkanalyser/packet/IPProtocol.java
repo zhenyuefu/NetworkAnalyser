@@ -1,4 +1,4 @@
-package indi.zhenyue.networkanalyser.packet;
+package projectreseau.networkanalyser.packet;
 
 public interface IPProtocol {
     int IP = 0;

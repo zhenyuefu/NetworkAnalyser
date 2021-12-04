@@ -1,4 +1,4 @@
-package indi.zhenyue.networkanalyser.packet;
+package projectreseau.networkanalyser.packet;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
