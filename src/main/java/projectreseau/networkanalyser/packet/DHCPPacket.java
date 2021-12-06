@@ -200,6 +200,17 @@ public class DHCPPacket extends UDPPacket {
                         sousItemsList.get(sousItemsList.size() - 1).getChildren().add(new TreeItem<>("Length: " + length));
                         sousItemsList.get(sousItemsList.size() - 1).getChildren().add(new TreeItem<>("Host Name: " + HexUtils.toStringHex(Objects.requireNonNull(HexUtils.bytesToHexString(bytes, i + 2, length)))));
                     }
+                    case 28 -> {
+                        String ip = IPAddress.toString(ArrayHelper.extractInteger(bytes, i + 2, 4));
+                        sousItemsList.add(new TreeItem<>(String.format("Option: (%d) Broadcast Address (%s)", option, ip)));
+                        sousItemsList.get(sousItemsList.size() - 1).getChildren().add(new TreeItem<>("Length: " + length));
+                        sousItemsList.get(sousItemsList.size() - 1).getChildren().add(new TreeItem<>("Broadcast Address: " + ip));
+                    }
+                    case 43 -> {
+                        sousItemsList.add(new TreeItem<>(String.format("Option: (%d) Vendor-Specific Information", option)));
+                        sousItemsList.get(sousItemsList.size() - 1).getChildren().add(new TreeItem<>("Length: " + length));
+                        sousItemsList.get(sousItemsList.size() - 1).getChildren().add(new TreeItem<>("Value: " + HexUtils.bytesToHexString(bytes, i + 2, length)));
+                    }
                     case 50 -> {
                         String ip = IPAddress.toString(ArrayHelper.extractInteger(bytes, i + 2, 4));
                         sousItemsList.add(new TreeItem<>(String.format("Option: (%d) Requested IP Address (%s)", option, ip)));
@@ -214,8 +225,14 @@ public class DHCPPacket extends UDPPacket {
                     }
                     case 53 -> {
                         dhcpMessageType = switch (bytes[i + 2]) {
+                            case 1 -> "Discover";
+                            case 2 -> "Offer";
                             case 3 -> "Request";
+                            case 4 -> "Decline";
                             case 5 -> "ACK";
+                            case 6 -> "NAK";
+                            case 7 -> "Release";
+                            case 8 -> "Inform";
                             default -> "";
                         };
                         sousItemsList.add(new TreeItem<>(String.format("Option: (%d) DHCP Message Type (%s)", option, dhcpMessageType)));
@@ -274,6 +291,11 @@ public class DHCPPacket extends UDPPacket {
                     }
                     case 224 -> {
                         sousItemsList.add(new TreeItem<>(String.format("Option: (%d) Private", option)));
+                        sousItemsList.get(sousItemsList.size() - 1).getChildren().add(new TreeItem<>("Length: " + length));
+                        sousItemsList.get(sousItemsList.size() - 1).getChildren().add(new TreeItem<>("Value: " + HexUtils.bytesToHexString(bytes, i + 2, length)));
+                    }
+                    default -> {
+                        sousItemsList.add(new TreeItem<>(String.format("Option: (%d) Unknown", option)));
                         sousItemsList.get(sousItemsList.size() - 1).getChildren().add(new TreeItem<>("Length: " + length));
                         sousItemsList.get(sousItemsList.size() - 1).getChildren().add(new TreeItem<>("Value: " + HexUtils.bytesToHexString(bytes, i + 2, length)));
                     }

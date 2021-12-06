@@ -42,9 +42,12 @@ public class DNSPacket extends UDPPacket {
         return ArrayHelper.extractInteger(bytes, udpOffset + 10, 2);
     }
 
-    public String getName() {
+    public String getQueriesName(){
+        return getName(12);
+    }
+    public String getName(int indice) {
         StringBuilder sb = new StringBuilder();
-        int i = udpOffset + 12;
+        int i = udpOffset + indice;
         labelCount = 0;
         while (bytes[i] != 0) {
             int cnt = ArrayHelper.extractInteger(bytes, i, 1);
@@ -68,7 +71,8 @@ public class DNSPacket extends UDPPacket {
     public String getType() {
         return switch (getIntType()) {
             case 12 -> "PTR";
-            default -> "";
+            case 0xfb -> "IXFR";
+            default -> ""+getIntType();
         };
     }
 
@@ -79,7 +83,7 @@ public class DNSPacket extends UDPPacket {
     public String getQueriesClass() {
         return switch (getIntQueriesClass()) {
             case 1 -> "IN";
-            default -> "";
+            default -> ""+getIntQueriesClass();
         };
     }
 

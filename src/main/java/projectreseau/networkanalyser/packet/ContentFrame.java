@@ -143,17 +143,20 @@ public class ContentFrame {
                     sousItemsList.add(new TreeItem<>("Answer RRs: " + dnsPacket.getAnswerRRs()));
                     sousItemsList.add(new TreeItem<>("Authority RRs: " + dnsPacket.getAuthorityRRs()));
                     sousItemsList.add(new TreeItem<>("Additional RRs: " + dnsPacket.getAdditionalRRs()));
-                    sousItemsList.add(new TreeItem<>("Queries"));
-                    sousItem = new TreeItem<>(dnsPacket.getName());
+
+                    if (dnsPacket.getQuestions() > 0)
+                        sousItemsList.add(new TreeItem<>("Queries"));
+                    sousItem = new TreeItem<>(dnsPacket.getQueriesName());
                     sousItemsList.get(sousItemsList.size() - 1).getChildren().add(sousItem);
-                    sousItem.getChildren().add(new TreeItem<>("Name: " + dnsPacket.getName()));
+                    sousItem.getChildren().add(new TreeItem<>("Name: " + dnsPacket.getQueriesName()));
                     sousItem.getChildren().add(new TreeItem<>(String.format("[Name Length: %d]", dnsPacket.getNameLength())));
                     sousItem.getChildren().add(new TreeItem<>(String.format("[Label Count: %d]", dnsPacket.getLabelCount())));
                     sousItem.getChildren().add(new TreeItem<>(String.format("Type: %s (%d)", dnsPacket.getType(), dnsPacket.getIntType())));
                     sousItem.getChildren().add(new TreeItem<>(String.format("Class: %s (0x%04x)", dnsPacket.getQueriesClass(), dnsPacket.getIntQueriesClass())));
+
                     treeItems.get(5).getChildren().addAll(sousItemsList);
                     protocol = "DNS";
-                    info = String.format("Standard query %s %s %s %s", dnsPacket.getFlagsResponse() ? "response " : "", dnsPacket.getTransactionID(), dnsPacket.getType(), dnsPacket.getName());
+                    info = String.format("Standard query %s %s %s %s", dnsPacket.getFlagsResponse() ? "response " : "", dnsPacket.getTransactionID(), dnsPacket.getType(), dnsPacket.getQueriesName());
                 }
             }
 
