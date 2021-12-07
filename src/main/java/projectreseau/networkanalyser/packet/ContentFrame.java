@@ -145,14 +145,13 @@ public class ContentFrame {
                     sousItemsList.add(new TreeItem<>("Additional RRs: " + dnsPacket.getAdditionalRRs()));
 
                     if (dnsPacket.getQuestions() > 0)
-                        sousItemsList.add(new TreeItem<>("Queries"));
-                    sousItem = new TreeItem<>(dnsPacket.getQueriesName());
-                    sousItemsList.get(sousItemsList.size() - 1).getChildren().add(sousItem);
-                    sousItem.getChildren().add(new TreeItem<>("Name: " + dnsPacket.getQueriesName()));
-                    sousItem.getChildren().add(new TreeItem<>(String.format("[Name Length: %d]", dnsPacket.getNameLength())));
-                    sousItem.getChildren().add(new TreeItem<>(String.format("[Label Count: %d]", dnsPacket.getLabelCount())));
-                    sousItem.getChildren().add(new TreeItem<>(String.format("Type: %s (%d)", dnsPacket.getType(), dnsPacket.getIntType())));
-                    sousItem.getChildren().add(new TreeItem<>(String.format("Class: %s (0x%04x)", dnsPacket.getQueriesClass(), dnsPacket.getIntQueriesClass())));
+                        dnsPacket.generateQueries(sousItemsList);
+                    if (dnsPacket.getAnswerRRs() > 0)
+                        dnsPacket.generateAnswers(sousItemsList);
+                    if(dnsPacket.getAuthorityRRs()>0)
+                        dnsPacket.generateAuthority(sousItemsList);
+                    if(dnsPacket.getAdditionalRRs()>0)
+                        dnsPacket.generateAdditional(sousItemsList);
 
                     treeItems.get(5).getChildren().addAll(sousItemsList);
                     protocol = "DNS";
