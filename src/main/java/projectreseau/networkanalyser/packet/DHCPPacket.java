@@ -1,20 +1,27 @@
 package projectreseau.networkanalyser.packet;
 
+import javafx.scene.control.TreeItem;
 import projectreseau.networkanalyser.util.ArrayHelper;
 import projectreseau.networkanalyser.util.HexUtils;
 import projectreseau.networkanalyser.util.TimeUtils;
-import javafx.scene.control.TreeItem;
 
 import java.util.List;
 import java.util.Objects;
 
 public class DHCPPacket extends UDPPacket {
+    private int messageType;
+    private String dhcpMessageType;
+    private int bootpFlags;
+    private int reservedFlags;
+    private String clientIPAddress;
+    private String yourIPAddress;
+    private String nextServerIPAddress;
+    private String relayAgentIPAddress;
+    private String clientMACAddress;
+
     public DHCPPacket(byte[] bytes) {
         super(bytes);
     }
-
-    private int messageType;
-    private String dhcpMessageType;
 
     public String getDhcpMessageType() {
         return dhcpMessageType;
@@ -30,7 +37,7 @@ public class DHCPPacket extends UDPPacket {
         return switch (messageType) {
             case 1 -> "Boot Request (1)";
             case 2 -> "Boot Reply (2)";
-            default -> "";
+            default -> "Unknown";
         };
     }
 
@@ -41,7 +48,8 @@ public class DHCPPacket extends UDPPacket {
     public String getHardwareType(int hardwareType) {
         return switch (hardwareType) {
             case 1 -> "Ethernet (0x01)";
-            default -> "";
+            case -1 -> "Invalid";
+            default -> "Unknown";
         };
     }
 
@@ -61,8 +69,6 @@ public class DHCPPacket extends UDPPacket {
         return ArrayHelper.extractInteger(bytes, udpOffset + 8, 2);
     }
 
-    private int bootpFlags;
-
     public int getBootpFlags() {
         bootpFlags = ArrayHelper.extractInteger(bytes, udpOffset + 10, 2);
         return bootpFlags;
@@ -77,11 +83,9 @@ public class DHCPPacket extends UDPPacket {
         return switch (bootpFlags >> 15) {
             case 0 -> "Unicast";
             case 1 -> "Broadcast";
-            default -> null;
+            default -> "Unknown";
         };
     }
-
-    private int reservedFlags;
 
     public int getIntReservedFlags() {
         reservedFlags = bootpFlags & 0x7fff;
@@ -98,15 +102,11 @@ public class DHCPPacket extends UDPPacket {
                 reservedFlags);
     }
 
-    private String clientIPAddress;
-
     public String getClientIPAddress() {
         if (clientIPAddress == null)
             clientIPAddress = IPAddress.toString(ArrayHelper.extractInteger(bytes, udpOffset + 12, 4));
         return clientIPAddress;
     }
-
-    private String yourIPAddress;
 
     public String getYourIPAddress() {
         if (yourIPAddress == null)
@@ -114,23 +114,17 @@ public class DHCPPacket extends UDPPacket {
         return yourIPAddress;
     }
 
-    private String nextServerIPAddress;
-
     public String getNextServerIPAddress() {
         if (nextServerIPAddress == null)
             nextServerIPAddress = IPAddress.toString(ArrayHelper.extractInteger(bytes, udpOffset + 20, 4));
         return nextServerIPAddress;
     }
 
-    private String relayAgentIPAddress;
-
     public String getRelayAgentIPAddress() {
         if (relayAgentIPAddress == null)
             relayAgentIPAddress = IPAddress.toString(ArrayHelper.extractInteger(bytes, udpOffset + 24, 4));
         return relayAgentIPAddress;
     }
-
-    private String clientMACAddress;
 
     public String getClientMACAddress() {
         if (clientMACAddress == null)
@@ -157,7 +151,7 @@ public class DHCPPacket extends UDPPacket {
     public String getMagicCookie() {
         if (getIntMagicCookie() == 0x63825363)
             return "DHCP";
-        return "";
+        return "Unknown";
     }
 
     public void generateOption(List<TreeItem<String>> sousItemsList) {
@@ -233,7 +227,7 @@ public class DHCPPacket extends UDPPacket {
                             case 6 -> "NAK";
                             case 7 -> "Release";
                             case 8 -> "Inform";
-                            default -> "";
+                            default -> "Unknown";
                         };
                         sousItemsList.add(new TreeItem<>(String.format("Option: (%d) DHCP Message Type (%s)", option, dhcpMessageType)));
                         sousItemsList.get(sousItemsList.size() - 1).getChildren().add(new TreeItem<>("Length: " + length));

@@ -1,11 +1,11 @@
 package projectreseau.networkanalyser;
 
-import projectreseau.networkanalyser.packet.*;
-import projectreseau.networkanalyser.util.FileUtility;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import projectreseau.networkanalyser.packet.*;
+import projectreseau.networkanalyser.util.FileUtility;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -15,6 +15,7 @@ import java.util.List;
  * @author zhenyue
  */
 public class MainController {
+    private final List<Packet> listPackets = new ArrayList<>();
     private Stage stage;
     @FXML
     private Label networkPacketLabel;
@@ -26,7 +27,6 @@ public class MainController {
     private TableColumn<Frame, String> numCol, timeCol, srcCol, destCol, protocolCol, lengthCol, infoCol;
     @FXML
     private TreeView<String> treeView;
-    private final List<Packet> listPackets = new ArrayList<>();
 
     public void setStage(Stage stage) {
         this.stage = stage;

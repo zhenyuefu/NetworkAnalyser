@@ -4,10 +4,10 @@ import projectreseau.networkanalyser.util.ArrayHelper;
 
 public class EthernetPacket extends Packet implements EthernetProtocol {
 
+    private final int protocol;
     protected int ethOffset;
     protected String macAddressSource;
     protected String macAddressDestination;
-    private final int protocol;
 
     public EthernetPacket(byte[] bytes) {
         super(bytes);

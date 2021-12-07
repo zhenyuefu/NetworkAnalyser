@@ -9,6 +9,16 @@ public class IPPacket extends EthernetPacket implements IPProtocol {
     protected int ipHeaderLength;
     protected String ipAddressSource;
     protected String ipAddressDestination;
+    private int version;
+    private boolean versionSet = false;
+    private String differentiatedServices;
+    private int totalLength = -1;
+    private int identification = -1;
+    private int flag;
+    private int fragmentOffset = -1;
+    private int timeToLive = -1;
+    private int protocolIP;
+    private int headerChecksum = -1;
 
     public IPPacket(byte[] bytes) {
         super(bytes);
@@ -28,9 +38,6 @@ public class IPPacket extends EthernetPacket implements IPProtocol {
         return ipAddressDestination;
     }
 
-    private int version;
-    private boolean versionSet = false;
-
     public int getVersion() {
         if (!versionSet) {
             version = (ArrayHelper.extractInteger(bytes, ethOffset, 1) >> 4) & 0xf;
@@ -43,15 +50,11 @@ public class IPPacket extends EthernetPacket implements IPProtocol {
         return ipHeaderLength;
     }
 
-    private String differentiatedServices;
-
     public String getDifferentiatedServices() {
         if (differentiatedServices == null)
             differentiatedServices = "0x" + HexUtils.byteToHexString(bytes[ethOffset + 1]);
         return differentiatedServices;
     }
-
-    private int totalLength = -1;
 
     public int getTotalLength() {
         if (totalLength == -1)
@@ -59,15 +62,11 @@ public class IPPacket extends EthernetPacket implements IPProtocol {
         return totalLength;
     }
 
-    private int identification = -1;
-
     public int getIdentification() {
         if (identification == -1)
             identification = ArrayHelper.extractInteger(bytes, ethOffset + 4, 2);
         return identification;
     }
-
-    private int flag;
 
     public int getFlag() {
         flag = ArrayHelper.extractInteger(bytes, ethOffset + 6, 1);
@@ -104,23 +103,17 @@ public class IPPacket extends EthernetPacket implements IPProtocol {
         };
     }
 
-    private int fragmentOffset = -1;
-
     public int getFragmentOffset() {
         if (fragmentOffset == -1)
             fragmentOffset = ArrayHelper.extractInteger(bytes, ethOffset + 7, 1);
         return fragmentOffset;
     }
 
-    private int timeToLive = -1;
-
     public int getTimeToLive() {
         if (timeToLive == -1)
             timeToLive = ArrayHelper.extractInteger(bytes, ethOffset + 8, 1);
         return timeToLive;
     }
-
-    private int protocolIP;
 
     public int getIntProtocolIP() {
         protocolIP = ArrayHelper.extractInteger(bytes, ethOffset + 9, 1);
@@ -140,8 +133,6 @@ public class IPPacket extends EthernetPacket implements IPProtocol {
             default -> "";
         };
     }
-
-    private int headerChecksum = -1;
 
     public int getHeaderChecksum() {
         if (headerChecksum == -1)

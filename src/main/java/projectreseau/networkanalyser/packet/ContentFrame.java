@@ -9,9 +9,9 @@ import java.util.List;
 public class ContentFrame {
 
     private final TreeView<String> treeView;
-    private int frame_id;
     private final byte[] bytes;
     private final List<TreeItem<String>> treeItems;
+    private int frame_id;
     private TreeItem<String> treeItemRoot;
     private String protocol;
     private String info;
@@ -148,9 +148,9 @@ public class ContentFrame {
                         dnsPacket.generateQueries(sousItemsList);
                     if (dnsPacket.getAnswerRRs() > 0)
                         dnsPacket.generateAnswers(sousItemsList);
-                    if(dnsPacket.getAuthorityRRs()>0)
+                    if (dnsPacket.getAuthorityRRs() > 0)
                         dnsPacket.generateAuthority(sousItemsList);
-                    if(dnsPacket.getAdditionalRRs()>0)
+                    if (dnsPacket.getAdditionalRRs() > 0)
                         dnsPacket.generateAdditional(sousItemsList);
 
                     treeItems.get(5).getChildren().addAll(sousItemsList);

@@ -1,11 +1,11 @@
 package projectreseau.networkanalyser.packet;
 
-import projectreseau.networkanalyser.util.ArrayHelper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import projectreseau.networkanalyser.util.ArrayHelper;
 
 import java.util.List;
 
@@ -14,8 +14,8 @@ public class FrameAnalyser {
     private final TableView<Frame> tableViewFrame;
     private final ObservableList<Frame> data;
     private final TableColumn<Frame, String> numCol, timeCol, srcCol, destCol, protocolCol, lengthCol, infoCol;
-    private byte[] bytes;
     private final List<Packet> packets;
+    private byte[] bytes;
 
     public FrameAnalyser(List<Packet> packets, TableView<Frame> tableViewFrame, TableColumn<Frame, String> numCol,
                          TableColumn<Frame, String> timeCol, TableColumn<Frame, String> srcCol, TableColumn<Frame, String> destCol,

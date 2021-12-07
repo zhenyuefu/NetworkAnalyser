@@ -32,66 +32,62 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.input.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TreeView?>
 <?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectreseau.networkanalyser.MainController">
-  <children>
-    <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
-      <menus>
-        <Menu mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem fx:id="menuOpen" mnemonicParsing="false" onAction="#menuOpenOnClick" text="Open…">
-                     <accelerator>
-                        <KeyCodeCombination alt="UP" code="O" control="UP" meta="UP" shift="UP" shortcut="DOWN" />
-                     </accelerator></MenuItem>
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem fx:id="menuSave" mnemonicParsing="false" text="Save" />
-            <MenuItem fx:id="menuSaveAs" mnemonicParsing="false" text="Save As…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem fx:id="menuExport" mnemonicParsing="false" onAction="#menuExportOnClick" text="Export" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" onAction="#menuExitOnClick" text="Quit">
-                     <accelerator>
-                        <KeyCodeCombination alt="UP" code="Q" control="UP" meta="UP" shift="UP" shortcut="DOWN" />
-                     </accelerator></MenuItem>
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" VBox.vgrow="ALWAYS">
-      <children>
-            <TableView fx:id="tableViewFrame" layoutX="49.0" layoutY="27.0" prefHeight="227.0" prefWidth="803.0">
-              <columns>
-                <TableColumn fx:id="numCol" prefWidth="75.0" text="No." />
-                <TableColumn fx:id="timeCol" text="Time" />
-                  <TableColumn fx:id="srcCol" prefWidth="150.0" text="Source" />
-                  <TableColumn fx:id="destCol" prefWidth="150.0" text="Destination" />
-                  <TableColumn fx:id="protocolCol" text="Protocol" />
-                  <TableColumn fx:id="lengthCol" text="Length" />
-                  <TableColumn fx:id="infoCol" prefWidth="299.0" text="Info" />
-              </columns>
-            </TableView>
-            <TreeView fx:id="treeView" layoutX="49.0" layoutY="266.0" prefHeight="227.0" prefWidth="803.0" />
-      </children>
-    </AnchorPane>
-  </children>
+<VBox xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8"
+      fx:controller="projectreseau.networkanalyser.MainController">
+    <children>
+        <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem fx:id="menuOpen" mnemonicParsing="false" onAction="#menuOpenOnClick" text="Open…">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="O" control="UP" meta="UP" shift="UP"
+                                                    shortcut="DOWN"/>
+                            </accelerator>
+                        </MenuItem>
+                        <SeparatorMenuItem mnemonicParsing="false"/>
+                        <MenuItem mnemonicParsing="false" text="Close"/>
+                        <MenuItem fx:id="menuSave" mnemonicParsing="false" text="Save"/>
+                        <MenuItem fx:id="menuSaveAs" mnemonicParsing="false" text="Save As…"/>
+                        <SeparatorMenuItem mnemonicParsing="false"/>
+                        <MenuItem fx:id="menuExport" mnemonicParsing="false" onAction="#menuExportOnClick"
+                                  text="Export"/>
+                        <SeparatorMenuItem mnemonicParsing="false"/>
+                        <MenuItem mnemonicParsing="false" onAction="#menuExitOnClick" text="Quit">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="Q" control="UP" meta="UP" shift="UP"
+                                                    shortcut="DOWN"/>
+                            </accelerator>
+                        </MenuItem>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About MyHelloApp"/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="600.0" minWidth="900.0" prefHeight="600.0"
+                    prefWidth="900.0" VBox.vgrow="ALWAYS">
+            <children>
+                <TableView fx:id="tableViewFrame" layoutX="49.0" layoutY="27.0" prefHeight="227.0" prefWidth="803.0">
+                    <columns>
+                        <TableColumn fx:id="numCol" prefWidth="75.0" text="No."/>
+                        <TableColumn fx:id="timeCol" text="Time"/>
+                        <TableColumn fx:id="srcCol" prefWidth="150.0" text="Source"/>
+                        <TableColumn fx:id="destCol" prefWidth="150.0" text="Destination"/>
+                        <TableColumn fx:id="protocolCol" text="Protocol"/>
+                        <TableColumn fx:id="lengthCol" text="Length"/>
+                        <TableColumn fx:id="infoCol" prefWidth="299.0" text="Info"/>
+                    </columns>
+                </TableView>
+                <TreeView fx:id="treeView" layoutX="49.0" layoutY="266.0" prefHeight="227.0" prefWidth="803.0"/>
+            </children>
+        </AnchorPane>
+    </children>
 </VBox>

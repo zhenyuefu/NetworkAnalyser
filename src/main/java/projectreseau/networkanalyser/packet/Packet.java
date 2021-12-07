@@ -17,7 +17,8 @@ public class Packet {
         this.bytes = bytes;
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
         return "Packet{" + "bytes=" + Arrays.toString(bytes) + '}';
     }
 

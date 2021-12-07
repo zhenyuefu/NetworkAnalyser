@@ -12,7 +12,12 @@ import java.io.IOException;
  * @author zhenyue
  */
 public class MainApplication extends Application {
-    @Override public void start(Stage stage) throws IOException {
+    public static void main(String[] args) {
+        launch();
+    }
+
+    @Override
+    public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("net.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         MainController controller = fxmlLoader.getController();
@@ -22,9 +27,5 @@ public class MainApplication extends Application {
         stage.setTitle("Network Packet Analyser");
         stage.setScene(scene);
         stage.show();
-    }
-
-    public static void main(String[] args) {
-        launch();
     }
 }

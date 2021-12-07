@@ -55,7 +55,6 @@ public class DNSPacket extends UDPPacket {
         StringBuilder sb = new StringBuilder();
         int i = udpOffset + index;
         while (bytes[i] != 0) {
-            System.out.println(bytes[i]);
             if ((bytes[i] & 0xf0) == 0xc0) {
                 sb.append(getName(((ArrayHelper.extractInteger(bytes, i, 1) & 0x0f) << 8) | ArrayHelper.extractInteger(bytes, i + 1, 1))).append(".");
                 i = i + 1;
@@ -149,8 +148,8 @@ public class DNSPacket extends UDPPacket {
             case 2 -> "Name Server: " + getName(index + nameByteLength + 10, false);
             case 5 -> "CNAME: " + getName(index + nameByteLength + 10, false);
             case 6 -> "SOA";
-            case 16 -> "TXT Length: "+ArrayHelper.extractInteger(bytes, udpOffset + index + nameByteLength + 10, 1)+" TXT: "+ HexUtils.toStringHex(Objects.requireNonNull(HexUtils.bytesToHexString(bytes, udpOffset + index + nameByteLength + 11, ArrayHelper.extractInteger(bytes, udpOffset + index + nameByteLength + 10, 1))));
-            default -> "Value: " + HexUtils.bytesToHexString(bytes,udpOffset + index + nameByteLength + 10, getDataLength(index));
+            case 16 -> "TXT Length: " + ArrayHelper.extractInteger(bytes, udpOffset + index + nameByteLength + 10, 1) + " TXT: " + HexUtils.toStringHex(Objects.requireNonNull(HexUtils.bytesToHexString(bytes, udpOffset + index + nameByteLength + 11, ArrayHelper.extractInteger(bytes, udpOffset + index + nameByteLength + 10, 1))));
+            default -> "Value: " + HexUtils.bytesToHexString(bytes, udpOffset + index + nameByteLength + 10, getDataLength(index));
         };
     }
 
@@ -158,7 +157,7 @@ public class DNSPacket extends UDPPacket {
     public void generateQueries(List<TreeItem<String>> sousItemsList) {
         sousItemsList.add(new TreeItem<>("Queries"));
         for (int i = 0; i < getQuestions(); i++) {
-            TreeItem<String> sousItem = new TreeItem<>(String.format("%s: type: %s, class %s",getName(index), getType(index), getQueriesClass(index)));
+            TreeItem<String> sousItem = new TreeItem<>(String.format("%s: type: %s, class %s", getName(index), getType(index), getQueriesClass(index)));
             sousItemsList.get(sousItemsList.size() - 1).getChildren().add(sousItem);
             labelCount = 0;
             sousItem.getChildren().add(new TreeItem<>("Name: " + getName(index)));
@@ -192,7 +191,7 @@ public class DNSPacket extends UDPPacket {
     }
 
     private void generateResponse(List<TreeItem<String>> sousItemsList) {
-        TreeItem<String> sousItem = new TreeItem<>(String.format("%s: type: %s, class %s, %s",getName(index), getType(index), getQueriesClass(index), getData(index)));
+        TreeItem<String> sousItem = new TreeItem<>(String.format("%s: type: %s, class %s, %s", getName(index), getType(index), getQueriesClass(index), getData(index)));
         sousItemsList.get(sousItemsList.size() - 1).getChildren().add(sousItem);
         sousItem.getChildren().add(new TreeItem<>("Name: " + getName(index)));
         sousItem.getChildren().add(new TreeItem<>(String.format("Type: %s (%d)", getType(index), getIntType(index))));
