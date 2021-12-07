@@ -16,7 +16,7 @@ Internet Protocol Version 4, Src: 0.0.0.0, Dst: 255.255.255.255
 	Header Length: 20
 	Differentiated Services Field: 0x00
 	Total Length: 328
-	Identification: 0x471f (18207)
+	Identification: 0x48f1 (18673)
 	Flags: 0x00
 		0... .... = Reserved bit: Not set
 		.0.. .... = Don't fragment: Not set
@@ -24,21 +24,21 @@ Internet Protocol Version 4, Src: 0.0.0.0, Dst: 255.255.255.255
 	Fragment Offset: 0
 	Time to Live: 255
 	Protocol: UDP (17)
-	Header Checksum: 0x7386
+	Header Checksum: 0x71b4
 	Source Address: 0.0.0.0
 	Destination Address: 255.255.255.255
 User Datagram Protocol, Src Port: 68, Dst Port: 67
 	Source Port: 68
 	Destination Port: 67
 	Length: 308
-	Checksum: 0x7b60
+	Checksum: 0x5732
 	UDP payload (300 bytes)
 Dynamic Host Configuration Protocol
 	Message type: Boot Request (1)
 	Hardware type: Ethernet (0x01)
 	Hardware address length: 6
 	Hops: 0
-	Transaction ID: 0xf37500d2
+	Transaction ID: 0x8578e8de
 	Seconds elapsed: 0
 	Bootp flags: 0x0000 (Unicast)
 		0... .... .... .... = Broadcast flag: Unicast
@@ -52,9 +52,9 @@ Dynamic Host Configuration Protocol
 	Server host name: 0
 	Boot file name: 0
 	Magic cookie: DHCP
-	Option: (53) DHCP Message Type (Request)
+	Option: (53) DHCP Message Type (Discover)
 		Length: 1
-		DHCP: Request (1)
+		DHCP: Discover (1)
 	Option: (55) Parameter Request List
 		Length: 10
 		Parameter Request List Item: (1) Subnet Mask
@@ -74,9 +74,6 @@ Dynamic Host Configuration Protocol
 		Length: 7
 		Hardware type: Ethernet (0x01) (0x01)
 		Client MAC address: 8c:85:90:26:21:c5
-	Option: (50) Requested IP Address (10.64.23.157)
-		Length: 4
-		Requested IP Address: 10.64.23.157
 	Option: (51) IP Address Lease Time
 		Length: 4
 		IP Address Lease Time: (7776000s) 90 days 
@@ -85,9 +82,97 @@ Dynamic Host Configuration Protocol
 		Host Name: wangzhedeMBP
 	Option: (255) End
 		Option End: 255
-	Padding: 0000000000
+	Padding: 0000000000000000000000
 
-Frame  2: 342 bytes on wire (2736 bits), 342 bytes captured (2736 bits) on interface unknown, id 0
+Frame  2: 373 bytes on wire (2984 bits), 373 bytes captured (2984 bits) on interface unknown, id 0
+	Interface id: 0 (known)
+		Interface name: unknown
+Ethernet II, Src: 00:09:0f:09:00:02, Dest: 8c:85:90:26:21:c5
+	Destination: 8c:85:90:26:21:c5
+		Address: 8c:85:90:26:21:c5
+		.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+		.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+	Source: 00:09:0f:09:00:02
+		Address: 00:09:0f:09:00:02
+		.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+		.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+	Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 10.64.63.254, Dst: 10.64.13.121
+	Version: 4
+	Header Length: 20
+	Differentiated Services Field: 0x10
+	Total Length: 359
+	Identification: 0x0000 (0)
+	Flags: 0x00
+		0... .... = Reserved bit: Not set
+		.0.. .... = Don't fragment: Not set
+		..0. .... = More fragments: Not set
+	Fragment Offset: 0
+	Time to Live: 16
+	Protocol: UDP (17)
+	Header Checksum: 0x4780
+	Source Address: 10.64.63.254
+	Destination Address: 10.64.13.121
+User Datagram Protocol, Src Port: 67, Dst Port: 68
+	Source Port: 67
+	Destination Port: 68
+	Length: 339
+	Checksum: 0xba00
+	UDP payload (331 bytes)
+Dynamic Host Configuration Protocol
+	Message type: Boot Reply (2)
+	Hardware type: Ethernet (0x01)
+	Hardware address length: 6
+	Hops: 0
+	Transaction ID: 0x8578e8de
+	Seconds elapsed: 0
+	Bootp flags: 0x0000 (Unicast)
+		0... .... .... .... = Broadcast flag: Unicast
+		.000 0000 0000 0000 = Reserved flags: 0x0000
+	Client IP address: 0.0.0.0
+	Your (client) IP address: 10.64.13.121
+	Next server IP address: 0.0.0.0
+	Relay agent IP address: 0.0.0.0
+	Client MAC address: 8c:85:90:26:21:c5
+	Client hardware address padding: 00000000000000000000
+	Server host name: 0
+	Boot file name: 0
+	Magic cookie: DHCP
+	Option: (53) DHCP Message Type (Offer)
+		Length: 1
+		DHCP: Offer (1)
+	Option: (54) DHCP Server Identifier (10.64.63.254)
+		Length: 4
+		DHCP Server Identifier: 10.64.63.254
+	Option: (51) IP Address Lease Time
+		Length: 4
+		IP Address Lease Time: (43200s) 12 hours 
+	Option: (1) Subnet Mask (255.255.192.0)
+		Length: 4
+		Subnet Mask: 255.255.192.0
+	Option: (3) Router
+		Length: 4
+		Router: 10.64.63.254
+	Option: (6) Domain Name Server
+		Length: 8
+		Domain Name Server: 134.157.0.129
+		Domain Name Server: 157.0.129.134
+	Option: (58) Renewal Time Value
+		Length: 4
+		Renewal Time Value: (21600s) 6 hours 
+	Option: (59) Rebinding Time Value
+		Length: 4
+		Rebinding Time Value: (37800s) 10 hours, 30 minutes 
+	Option: (2) Time Offset
+		Length: 4
+		Time Offset: (3600s) 1 hour 
+	Option: (224) Private
+		Length: 33
+		Value: 464754334b44335a3136383030303734464754334b44335a313638303030373800
+	Option: (255) End
+		Option End: 255
+
+Frame  3: 342 bytes on wire (2736 bits), 342 bytes captured (2736 bits) on interface unknown, id 0
 	Interface id: 0 (known)
 		Interface name: unknown
 Ethernet II, Src: 8c:85:90:26:21:c5, Dest: ff:ff:ff:ff:ff:ff
@@ -105,7 +190,7 @@ Internet Protocol Version 4, Src: 0.0.0.0, Dst: 255.255.255.255
 	Header Length: 20
 	Differentiated Services Field: 0x00
 	Total Length: 328
-	Identification: 0x4720 (18208)
+	Identification: 0x48f2 (18674)
 	Flags: 0x00
 		0... .... = Reserved bit: Not set
 		.0.. .... = Don't fragment: Not set
@@ -113,22 +198,22 @@ Internet Protocol Version 4, Src: 0.0.0.0, Dst: 255.255.255.255
 	Fragment Offset: 0
 	Time to Live: 255
 	Protocol: UDP (17)
-	Header Checksum: 0x7385
+	Header Checksum: 0x71b3
 	Source Address: 0.0.0.0
 	Destination Address: 255.255.255.255
 User Datagram Protocol, Src Port: 68, Dst Port: 67
 	Source Port: 68
 	Destination Port: 67
 	Length: 308
-	Checksum: 0x7b5f
+	Checksum: 0x65aa
 	UDP payload (300 bytes)
 Dynamic Host Configuration Protocol
 	Message type: Boot Request (1)
 	Hardware type: Ethernet (0x01)
 	Hardware address length: 6
 	Hops: 0
-	Transaction ID: 0xf37500d3
-	Seconds elapsed: 0
+	Transaction ID: 0x8578e8de
+	Seconds elapsed: 3
 	Bootp flags: 0x0000 (Unicast)
 		0... .... .... .... = Broadcast flag: Unicast
 		.000 0000 0000 0000 = Reserved flags: 0x0000
@@ -163,12 +248,12 @@ Dynamic Host Configuration Protocol
 		Length: 7
 		Hardware type: Ethernet (0x01) (0x01)
 		Client MAC address: 8c:85:90:26:21:c5
-	Option: (50) Requested IP Address (10.64.23.157)
+	Option: (50) Requested IP Address (10.64.13.121)
 		Length: 4
-		Requested IP Address: 10.64.23.157
-	Option: (51) IP Address Lease Time
+		Requested IP Address: 10.64.13.121
+	Option: (54) DHCP Server Identifier (10.64.63.254)
 		Length: 4
-		IP Address Lease Time: (7776000s) 90 days 
+		DHCP Server Identifier: 10.64.63.254
 	Option: (12) Host Name
 		Length: 12
 		Host Name: wangzhedeMBP
@@ -176,7 +261,7 @@ Dynamic Host Configuration Protocol
 		Option End: 255
 	Padding: 0000000000
 
-Frame  3: 373 bytes on wire (2984 bits), 373 bytes captured (2984 bits) on interface unknown, id 0
+Frame  4: 373 bytes on wire (2984 bits), 373 bytes captured (2984 bits) on interface unknown, id 0
 	Interface id: 0 (known)
 		Interface name: unknown
 Ethernet II, Src: 00:09:0f:09:00:02, Dest: 8c:85:90:26:21:c5
@@ -189,7 +274,7 @@ Ethernet II, Src: 00:09:0f:09:00:02, Dest: 8c:85:90:26:21:c5
 		.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
 		.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
 	Type: IPv4 (0x0800)
-Internet Protocol Version 4, Src: 10.64.63.254, Dst: 10.64.23.157
+Internet Protocol Version 4, Src: 10.64.63.254, Dst: 10.64.13.121
 	Version: 4
 	Header Length: 20
 	Differentiated Services Field: 0x10
@@ -202,27 +287,27 @@ Internet Protocol Version 4, Src: 10.64.63.254, Dst: 10.64.23.157
 	Fragment Offset: 0
 	Time to Live: 16
 	Protocol: UDP (17)
-	Header Checksum: 0x3d5c
+	Header Checksum: 0x4780
 	Source Address: 10.64.63.254
-	Destination Address: 10.64.23.157
+	Destination Address: 10.64.13.121
 User Datagram Protocol, Src Port: 67, Dst Port: 68
 	Source Port: 67
 	Destination Port: 68
 	Length: 339
-	Checksum: 0x1cc7
+	Checksum: 0xb6fd
 	UDP payload (331 bytes)
 Dynamic Host Configuration Protocol
 	Message type: Boot Reply (2)
 	Hardware type: Ethernet (0x01)
 	Hardware address length: 6
 	Hops: 0
-	Transaction ID: 0xf37500d3
-	Seconds elapsed: 0
+	Transaction ID: 0x8578e8de
+	Seconds elapsed: 3
 	Bootp flags: 0x0000 (Unicast)
 		0... .... .... .... = Broadcast flag: Unicast
 		.000 0000 0000 0000 = Reserved flags: 0x0000
 	Client IP address: 0.0.0.0
-	Your (client) IP address: 10.64.23.157
+	Your (client) IP address: 10.64.13.121
 	Next server IP address: 0.0.0.0
 	Relay agent IP address: 0.0.0.0
 	Client MAC address: 8c:85:90:26:21:c5
@@ -264,7 +349,7 @@ Dynamic Host Configuration Protocol
 	Option: (255) End
 		Option End: 255
 
-Frame  4: 98 bytes on wire (784 bits), 98 bytes captured (784 bits) on interface unknown, id 0
+Frame  5: 342 bytes on wire (2736 bits), 342 bytes captured (2736 bits) on interface unknown, id 0
 	Interface id: 0 (known)
 		Interface name: unknown
 Ethernet II, Src: 8c:85:90:26:21:c5, Dest: 00:09:0f:09:00:02
@@ -277,12 +362,80 @@ Ethernet II, Src: 8c:85:90:26:21:c5, Dest: 00:09:0f:09:00:02
 		.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
 		.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
 	Type: IPv4 (0x0800)
-Internet Protocol Version 4, Src: 10.64.23.157, Dst: 134.157.0.129
+Internet Protocol Version 4, Src: 10.64.7.214, Dst: 10.64.63.254
 	Version: 4
 	Header Length: 20
 	Differentiated Services Field: 0x00
-	Total Length: 84
-	Identification: 0x8348 (33608)
+	Total Length: 328
+	Identification: 0x4192 (16786)
+	Flags: 0x00
+		0... .... = Reserved bit: Not set
+		.0.. .... = Don't fragment: Not set
+		..0. .... = More fragments: Not set
+	Fragment Offset: 0
+	Time to Live: 64
+	Protocol: UDP (17)
+	Header Checksum: 0xdbbf
+	Source Address: 10.64.7.214
+	Destination Address: 10.64.63.254
+User Datagram Protocol, Src Port: 68, Dst Port: 67
+	Source Port: 68
+	Destination Port: 67
+	Length: 308
+	Checksum: 0x9bc9
+	UDP payload (300 bytes)
+Dynamic Host Configuration Protocol
+	Message type: Boot Request (1)
+	Hardware type: Ethernet (0x01)
+	Hardware address length: 6
+	Hops: 0
+	Transaction ID: 0xf375020a
+	Seconds elapsed: 0
+	Bootp flags: 0x0000 (Unicast)
+		0... .... .... .... = Broadcast flag: Unicast
+		.000 0000 0000 0000 = Reserved flags: 0x0000
+	Client IP address: 10.64.7.214
+	Your (client) IP address: 0.0.0.0
+	Next server IP address: 0.0.0.0
+	Relay agent IP address: 0.0.0.0
+	Client MAC address: 8c:85:90:26:21:c5
+	Client hardware address padding: 00000000000000000000
+	Server host name: 0
+	Boot file name: 0
+	Magic cookie: DHCP
+	Option: (53) DHCP Message Type (Release)
+		Length: 1
+		DHCP: Release (1)
+	Option: (61) Client identifier
+		Length: 7
+		Hardware type: Ethernet (0x01) (0x01)
+		Client MAC address: 8c:85:90:26:21:c5
+	Option: (54) DHCP Server Identifier (10.64.63.254)
+		Length: 4
+		DHCP Server Identifier: 10.64.63.254
+	Option: (255) End
+		Option End: 255
+	Padding: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000
+
+Frame  6: 342 bytes on wire (2736 bits), 342 bytes captured (2736 bits) on interface unknown, id 0
+	Interface id: 0 (known)
+		Interface name: unknown
+Ethernet II, Src: 8c:85:90:26:21:c5, Dest: ff:ff:ff:ff:ff:ff
+	Destination: ff:ff:ff:ff:ff:ff
+		Address: ff:ff:ff:ff:ff:ff
+		.... ..1. .... .... .... .... = LG bit: Locally administered address (this is NOT the factory default)
+		.... ...1 .... .... .... .... = IG bit: Group address (multicast/broadcast)
+	Source: 8c:85:90:26:21:c5
+		Address: 8c:85:90:26:21:c5
+		.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+		.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+	Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 0.0.0.0, Dst: 255.255.255.255
+	Version: 4
+	Header Length: 20
+	Differentiated Services Field: 0x00
+	Total Length: 328
+	Identification: 0x48ec (18668)
 	Flags: 0x00
 		0... .... = Reserved bit: Not set
 		.0.. .... = Don't fragment: Not set
@@ -290,81 +443,64 @@ Internet Protocol Version 4, Src: 10.64.23.157, Dst: 134.157.0.129
 	Fragment Offset: 0
 	Time to Live: 255
 	Protocol: UDP (17)
-	Header Checksum: 0x8f55
-	Source Address: 10.64.23.157
-	Destination Address: 134.157.0.129
-User Datagram Protocol, Src Port: 50669, Dst Port: 53
-	Source Port: 50669
-	Destination Port: 53
-	Length: 64
-	Checksum: 0x418c
-	UDP payload (56 bytes)
-Domain Name System (query)
-	Transaction ID: 0x490e
-	Flags: 0x0100 Standard query 
-	Questions: 1
-	Answer RRs: 0
-	Authority RRs: 0
-	Additional RRs: 0
-	Queries
-		db._dns-sd._udp.0.0.64.10.in-addr.arpa
-			Name: db._dns-sd._udp.0.0.64.10.in-addr.arpa
-			[Name Length: 38]
-			[Label Count: 9]
-			Type: PTR (12)
-			Class: IN (0x0001)
+	Header Checksum: 0x71b9
+	Source Address: 0.0.0.0
+	Destination Address: 255.255.255.255
+User Datagram Protocol, Src Port: 68, Dst Port: 67
+	Source Port: 68
+	Destination Port: 67
+	Length: 308
+	Checksum: 0xafce
+	UDP payload (300 bytes)
+Dynamic Host Configuration Protocol
+	Message type: Boot Request (1)
+	Hardware type: Ethernet (0x01)
+	Hardware address length: 6
+	Hops: 0
+	Transaction ID: 0x082bcecd
+	Seconds elapsed: 0
+	Bootp flags: 0x0000 (Unicast)
+		0... .... .... .... = Broadcast flag: Unicast
+		.000 0000 0000 0000 = Reserved flags: 0x0000
+	Client IP address: 10.64.7.253
+	Your (client) IP address: 0.0.0.0
+	Next server IP address: 0.0.0.0
+	Relay agent IP address: 0.0.0.0
+	Client MAC address: 8c:85:90:26:21:c5
+	Client hardware address padding: 00000000000000000000
+	Server host name: 0
+	Boot file name: 0
+	Magic cookie: DHCP
+	Option: (53) DHCP Message Type (Inform)
+		Length: 1
+		DHCP: Inform (1)
+	Option: (55) Parameter Request List
+		Length: 10
+		Parameter Request List Item: (1) Subnet Mask
+		Parameter Request List Item: (121) Classless Static Route
+		Parameter Request List Item: (3) Router
+		Parameter Request List Item: (6) Domain Name Server
+		Parameter Request List Item: (15) Domain Name
+		Parameter Request List Item: (119) Domain Search
+		Parameter Request List Item: (252) Private/Proxy autodiscovery
+		Parameter Request List Item: (95) LDAP
+		Parameter Request List Item: (44) NetBIOS over TCP/IP Name Server
+		Parameter Request List Item: (46) NetBIOS over TCP/IP Node Type
+	Option: (57) Maximum DHCP Message Size
+		Length: 2
+		Maximum DHCP Message Size: 1500
+	Option: (61) Client identifier
+		Length: 7
+		Hardware type: Ethernet (0x01) (0x01)
+		Client MAC address: 8c:85:90:26:21:c5
+	Option: (12) Host Name
+		Length: 12
+		Host Name: wangzhedeMBP
+	Option: (255) End
+		Option End: 255
+	Padding: 0000000000000000000000000000000000
 
-Frame  5: 175 bytes on wire (1400 bits), 175 bytes captured (1400 bits) on interface unknown, id 0
-	Interface id: 0 (known)
-		Interface name: unknown
-Ethernet II, Src: 00:09:0f:09:00:02, Dest: 8c:85:90:26:21:c5
-	Destination: 8c:85:90:26:21:c5
-		Address: 8c:85:90:26:21:c5
-		.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
-		.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
-	Source: 00:09:0f:09:00:02
-		Address: 00:09:0f:09:00:02
-		.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
-		.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
-	Type: IPv4 (0x0800)
-Internet Protocol Version 4, Src: 134.157.0.129, Dst: 10.64.23.157
-	Version: 4
-	Header Length: 20
-	Differentiated Services Field: 0x00
-	Total Length: 161
-	Identification: 0x8110 (33040)
-	Flags: 0x00
-		0... .... = Reserved bit: Not set
-		.0.. .... = Don't fragment: Not set
-		..0. .... = More fragments: Not set
-	Fragment Offset: 0
-	Time to Live: 62
-	Protocol: UDP (17)
-	Header Checksum: 0x5241
-	Source Address: 134.157.0.129
-	Destination Address: 10.64.23.157
-User Datagram Protocol, Src Port: 53, Dst Port: 50669
-	Source Port: 53
-	Destination Port: 50669
-	Length: 141
-	Checksum: 0xeb8a
-	UDP payload (133 bytes)
-Domain Name System (response)
-	Transaction ID: 0x490e
-	Flags: 0x8183 Standard query response
-	Questions: 1
-	Answer RRs: 0
-	Authority RRs: 1
-	Additional RRs: 0
-	Queries
-		db._dns-sd._udp.0.0.64.10.in-addr.arpa
-			Name: db._dns-sd._udp.0.0.64.10.in-addr.arpa
-			[Name Length: 38]
-			[Label Count: 9]
-			Type: PTR (12)
-			Class: IN (0x0001)
-
-Frame  6: 97 bytes on wire (776 bits), 97 bytes captured (776 bits) on interface unknown, id 0
+Frame  7: 73 bytes on wire (584 bits), 73 bytes captured (584 bits) on interface unknown, id 0
 	Interface id: 0 (known)
 		Interface name: unknown
 Ethernet II, Src: 8c:85:90:26:21:c5, Dest: 00:09:0f:09:00:02
@@ -377,12 +513,12 @@ Ethernet II, Src: 8c:85:90:26:21:c5, Dest: 00:09:0f:09:00:02
 		.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
 		.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
 	Type: IPv4 (0x0800)
-Internet Protocol Version 4, Src: 10.64.23.157, Dst: 134.157.0.129
+Internet Protocol Version 4, Src: 10.64.7.214, Dst: 134.157.0.129
 	Version: 4
 	Header Length: 20
 	Differentiated Services Field: 0x00
-	Total Length: 83
-	Identification: 0xf5e2 (62946)
+	Total Length: 59
+	Identification: 0xf1a5 (61861)
 	Flags: 0x00
 		0... .... = Reserved bit: Not set
 		.0.. .... = Don't fragment: Not set
@@ -390,31 +526,31 @@ Internet Protocol Version 4, Src: 10.64.23.157, Dst: 134.157.0.129
 	Fragment Offset: 0
 	Time to Live: 255
 	Protocol: UDP (17)
-	Header Checksum: 0x1cbc
-	Source Address: 10.64.23.157
+	Header Checksum: 0x30d8
+	Source Address: 10.64.7.214
 	Destination Address: 134.157.0.129
-User Datagram Protocol, Src Port: 53935, Dst Port: 53
-	Source Port: 53935
+User Datagram Protocol, Src Port: 51486, Dst Port: 53
+	Source Port: 51486
 	Destination Port: 53
-	Length: 63
-	Checksum: 0x5241
-	UDP payload (55 bytes)
+	Length: 39
+	Checksum: 0xf111
+	UDP payload (31 bytes)
 Domain Name System (query)
-	Transaction ID: 0xde4b
+	Transaction ID: 0xd90f
 	Flags: 0x0100 Standard query 
 	Questions: 1
 	Answer RRs: 0
 	Authority RRs: 0
 	Additional RRs: 0
 	Queries
-		b._dns-sd._udp.0.0.64.10.in-addr.arpa
-			Name: b._dns-sd._udp.0.0.64.10.in-addr.arpa
-			[Name Length: 37]
-			[Label Count: 9]
-			Type: PTR (12)
+		www.apple.com: type: A, class IN
+			Name: www.apple.com
+			[Name Length: 13]
+			[Label Count: 3]
+			Type: A (1)
 			Class: IN (0x0001)
 
-Frame  7: 174 bytes on wire (1392 bits), 174 bytes captured (1392 bits) on interface unknown, id 0
+Frame  8: 471 bytes on wire (3768 bits), 471 bytes captured (3768 bits) on interface unknown, id 0
 	Interface id: 0 (known)
 		Interface name: unknown
 Ethernet II, Src: 00:09:0f:09:00:02, Dest: 8c:85:90:26:21:c5
@@ -427,12 +563,12 @@ Ethernet II, Src: 00:09:0f:09:00:02, Dest: 8c:85:90:26:21:c5
 		.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
 		.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
 	Type: IPv4 (0x0800)
-Internet Protocol Version 4, Src: 134.157.0.129, Dst: 10.64.23.157
+Internet Protocol Version 4, Src: 134.157.0.129, Dst: 10.64.7.214
 	Version: 4
 	Header Length: 20
 	Differentiated Services Field: 0x00
-	Total Length: 160
-	Identification: 0x3b6e (15214)
+	Total Length: 457
+	Identification: 0x0c28 (3112)
 	Flags: 0x00
 		0... .... = Reserved bit: Not set
 		.0.. .... = Don't fragment: Not set
@@ -440,28 +576,150 @@ Internet Protocol Version 4, Src: 134.157.0.129, Dst: 10.64.23.157
 	Fragment Offset: 0
 	Time to Live: 62
 	Protocol: UDP (17)
-	Header Checksum: 0x97e4
+	Header Checksum: 0xd5c8
 	Source Address: 134.157.0.129
-	Destination Address: 10.64.23.157
-User Datagram Protocol, Src Port: 53, Dst Port: 53935
+	Destination Address: 10.64.7.214
+User Datagram Protocol, Src Port: 53, Dst Port: 51486
 	Source Port: 53
-	Destination Port: 53935
-	Length: 140
-	Checksum: 0xbb4f
-	UDP payload (132 bytes)
+	Destination Port: 51486
+	Length: 437
+	Checksum: 0xadb7
+	UDP payload (429 bytes)
 Domain Name System (response)
-	Transaction ID: 0xde4b
-	Flags: 0x8183 Standard query response
+	Transaction ID: 0xd90f
+	Flags: 0x8180 Standard query response
 	Questions: 1
-	Answer RRs: 0
-	Authority RRs: 1
-	Additional RRs: 0
+	Answer RRs: 4
+	Authority RRs: 8
+	Additional RRs: 5
 	Queries
-		b._dns-sd._udp.0.0.64.10.in-addr.arpa
-			Name: b._dns-sd._udp.0.0.64.10.in-addr.arpa
-			[Name Length: 37]
-			[Label Count: 9]
-			Type: PTR (12)
+		www.apple.com: type: A, class IN
+			Name: www.apple.com
+			[Name Length: 13]
+			[Label Count: 3]
+			Type: A (1)
 			Class: IN (0x0001)
+	Answers
+		www.apple.com: type: CNAME, class IN, CNAME: www.apple.com.edgekey.net
+			Name: www.apple.com
+			Type: CNAME (5)
+			Class: IN (0x0001)
+			Time to live: 1402 (23 minutes, 22 seconds )
+			Data Length: 27
+			CNAME: www.apple.com.edgekey.net
+		www.apple.com.edgekey.net: type: CNAME, class IN, CNAME: www.apple.com.edgekey.net.globalredir.akadns.net
+			Name: www.apple.com.edgekey.net
+			Type: CNAME (5)
+			Class: IN (0x0001)
+			Time to live: 21202 (5 hours, 53 minutes, 22 seconds )
+			Data Length: 47
+			CNAME: www.apple.com.edgekey.net.globalredir.akadns.net
+		www.apple.com.edgekey.net.globalredir.akadns.net: type: CNAME, class IN, CNAME: e6858.dscx.akamaiedge.net
+			Name: www.apple.com.edgekey.net.globalredir.akadns.net
+			Type: CNAME (5)
+			Class: IN (0x0001)
+			Time to live: 3202 (53 minutes, 22 seconds )
+			Data Length: 24
+			CNAME: e6858.dscx.akamaiedge.net
+		e6858.dscx.akamaiedge.net: type: A, class IN, Address: 2.18.98.76
+			Name: e6858.dscx.akamaiedge.net
+			Type: A (1)
+			Class: IN (0x0001)
+			Time to live: 1 (1 second )
+			Data Length: 4
+			Address: 2.18.98.76
+	Authoritative nameservers 
+		dscx.akamaiedge.net: type: NS, class IN, Name Server: n5dscx.akamaiedge.net
+			Name: dscx.akamaiedge.net
+			Type: NS (2)
+			Class: IN (0x0001)
+			Time to live: 3600 (1 hour )
+			Data Length: 9
+			Name Server: n5dscx.akamaiedge.net
+		dscx.akamaiedge.net: type: NS, class IN, Name Server: n2dscx.akamaiedge.net
+			Name: dscx.akamaiedge.net
+			Type: NS (2)
+			Class: IN (0x0001)
+			Time to live: 3600 (1 hour )
+			Data Length: 9
+			Name Server: n2dscx.akamaiedge.net
+		dscx.akamaiedge.net: type: NS, class IN, Name Server: n0dscx.akamaiedge.net
+			Name: dscx.akamaiedge.net
+			Type: NS (2)
+			Class: IN (0x0001)
+			Time to live: 3600 (1 hour )
+			Data Length: 9
+			Name Server: n0dscx.akamaiedge.net
+		dscx.akamaiedge.net: type: NS, class IN, Name Server: n4dscx.akamaiedge.net
+			Name: dscx.akamaiedge.net
+			Type: NS (2)
+			Class: IN (0x0001)
+			Time to live: 3600 (1 hour )
+			Data Length: 9
+			Name Server: n4dscx.akamaiedge.net
+		dscx.akamaiedge.net: type: NS, class IN, Name Server: n3dscx.akamaiedge.net
+			Name: dscx.akamaiedge.net
+			Type: NS (2)
+			Class: IN (0x0001)
+			Time to live: 3600 (1 hour )
+			Data Length: 9
+			Name Server: n3dscx.akamaiedge.net
+		dscx.akamaiedge.net: type: NS, class IN, Name Server: n6dscx.akamaiedge.net
+			Name: dscx.akamaiedge.net
+			Type: NS (2)
+			Class: IN (0x0001)
+			Time to live: 3600 (1 hour )
+			Data Length: 9
+			Name Server: n6dscx.akamaiedge.net
+		dscx.akamaiedge.net: type: NS, class IN, Name Server: n7dscx.akamaiedge.net
+			Name: dscx.akamaiedge.net
+			Type: NS (2)
+			Class: IN (0x0001)
+			Time to live: 3600 (1 hour )
+			Data Length: 9
+			Name Server: n7dscx.akamaiedge.net
+		dscx.akamaiedge.net: type: NS, class IN, Name Server: n1dscx.akamaiedge.net
+			Name: dscx.akamaiedge.net
+			Type: NS (2)
+			Class: IN (0x0001)
+			Time to live: 3600 (1 hour )
+			Data Length: 9
+			Name Server: n1dscx.akamaiedge.net
+	Additional records 
+		n0dscx.akamaiedge.net: type: A, class IN, Address: 88.221.81.192
+			Name: n0dscx.akamaiedge.net
+			Type: A (1)
+			Class: IN (0x0001)
+			Time to live: 3693 (1 hour, 1 minute, 33 seconds )
+			Data Length: 4
+			Address: 88.221.81.192
+		n1dscx.akamaiedge.net: type: A, class IN, Address: 23.1.254.94
+			Name: n1dscx.akamaiedge.net
+			Type: A (1)
+			Class: IN (0x0001)
+			Time to live: 3693 (1 hour, 1 minute, 33 seconds )
+			Data Length: 4
+			Address: 23.1.254.94
+		n2dscx.akamaiedge.net: type: A, class IN, Address: 2.21.35.157
+			Name: n2dscx.akamaiedge.net
+			Type: A (1)
+			Class: IN (0x0001)
+			Time to live: 3693 (1 hour, 1 minute, 33 seconds )
+			Data Length: 4
+			Address: 2.21.35.157
+		n3dscx.akamaiedge.net: type: A, class IN, Address: 2.21.35.158
+			Name: n3dscx.akamaiedge.net
+			Type: A (1)
+			Class: IN (0x0001)
+			Time to live: 3693 (1 hour, 1 minute, 33 seconds )
+			Data Length: 4
+			Address: 2.21.35.158
+		n4dscx.akamaiedge.net: type: A, class IN, Address: 95.100.252.141
+			Name: n4dscx.akamaiedge.net
+			Type: A (1)
+			Class: IN (0x0001)
+			Time to live: 3693 (1 hour, 1 minute, 33 seconds )
+			Data Length: 4
+			Address: 95.100.252.141
 
 
