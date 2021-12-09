@@ -11,14 +11,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author zhenyue
- */
 public class MainController {
     private final List<Packet> listPackets = new ArrayList<>();
     private Stage stage;
-    @FXML
-    private Label networkPacketLabel;
     @FXML
     private MenuBar menuBar;
     @FXML

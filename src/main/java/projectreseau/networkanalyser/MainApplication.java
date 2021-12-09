@@ -8,9 +8,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-/**
- * @author zhenyue
- */
 public class MainApplication extends Application {
     public static void main(String[] args) {
         launch();
